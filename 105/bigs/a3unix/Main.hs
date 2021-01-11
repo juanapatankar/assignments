@@ -1,5 +1,5 @@
 module Main (get_maze, print_maze, is_wall, place_player, move, can_move, game_loop, get_path, main) where 
-
+-- DEADLINE 13/1/20
 import System.Environment
 
 --maze_path = "assignments/105/bigs/a3unix/maze-big-4.txt"
@@ -83,16 +83,17 @@ game_loop m (x,y) = do
 ---- Part C
 
 -- Question 8
-move_me m (a,b) (x,y) 
-    | is_wall m (a,b)  = "yes"
-    | otherwise = "no"
+-- move_me m (a,b) (x,y) 
+   -- | is_wall m (a,b)  = "yes"
+    -- | otherwise = "no"
 get_path :: [String] -> (Int, Int) -> (Int, Int) -> [(Int, Int)]
 --get_path m start target = if start == target then [start] else [(21323213,2133213)]
-get_path m start target
-    |( start == target) = [start]
-    | otherwise = [(2323,2121)]
+-- get_path m start target
+   --  |( start == target) = [start]
+   -- | otherwise = [(2323,2121)]
 --get_path m (x,y) target = if (x,y) == target then [(x,y)] else if can_move m (x,y) 'd' then (x,y):get_path m (x+1,y) target 
 --else if can_move m (x,y) 's' then (x,y):get_path m (x, y+1) target else [(2,132321212)
+
 
 -- Question 9
 
