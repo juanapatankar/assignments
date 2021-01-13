@@ -3,7 +3,7 @@ module Main (get_maze, print_maze, is_wall, place_player, move, can_move, game_l
 import System.Environment
 
 --maze_path = "assignments/105/bigs/a3unix/maze-big-4.txt"
-maze_path = "/newpartition/assignments/105/bigs/a3unix/maze3.txt"
+maze_path = "/newpartition/assignments/105/bigs/a3unix/maze4.txt"
 --maze_path = "assignments/105/bigs/a3unix/maze4.txt"
 
 -- Useful code from Lecture 25
