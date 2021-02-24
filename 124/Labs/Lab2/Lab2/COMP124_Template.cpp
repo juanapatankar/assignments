@@ -3,11 +3,12 @@
 
 int main(void) {
 	// Declare variables here (C syntax)
-	int count1 = 15;
+	int count1 = -10;
 	int count2 = 5;
 	int num = 0;
 	_asm {
 		// Put assembly code here
+		
 	}
 	return 0;
 }
