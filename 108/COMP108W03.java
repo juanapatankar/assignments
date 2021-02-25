@@ -3,6 +3,7 @@
 // Enter your student ID: 201471422
 //
 import java.util.Arrays;
+import java.lang.Math;
 class COMP108W03 {
 
 	// print the content of an array of size n
@@ -41,27 +42,35 @@ class COMP108W03 {
 	// You can assume that data[] is already sorted
 	// refer to Lecture 6
 	static void binarySearch(int[] data, int n, int key) {
+		System.out.println(n + " " + data + " " + key);
 		if (n%2 == 0) {
 			int comparisons = 0;
 			int first = 0;
-			int last = n;
+			int last = n-1;
+			int mid = (int) Math.floor((last)/2.0);
 			boolean found = false;
-			while (first <= last && found == false && last != 0 && last < n) {
+			while (data.length != 1 && found == false) {
+				last = data.length - 1;
+				System.out.println(last);
+				first = 0;
+				mid = last/2;
 				comparisons += 1;
-				if (key > data[last/2]) {
-					first = last/2;
+				if (key > data[mid]) {
+					first = mid;
 					data = Arrays.copyOfRange(data, first, last);
-				} else if (key < data[last/2]) {
-					last = last/2;
+					first = 0;
+					
+				} else if (key < data[mid]) {
+					last = mid;
 					data = Arrays.copyOfRange(data, first, last);
-				} else {
-					found = true;
+				
 				}
 			}
-			if (found == true) {
+			System.out.println(Arrays.toString(data));
+			if (data[0] == key) {
 				System.out.println("Found " + key);
 				System.out.println("Number of comparisons: " + comparisons);
-			} else {
+			} else if (data.length == 0) {
 				System.out.println(key + " was not in the list");
 			}
 			
