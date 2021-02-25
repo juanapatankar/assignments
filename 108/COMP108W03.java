@@ -41,7 +41,7 @@ class COMP108W03 {
 	// data[] is an array in ascending order, n is size of array, key is the number we want to find
 	// You can assume that data[] is already sorted
 	// refer to Lecture 6
-	static void binarySearch(int[] data, int n, int key) {
+	/* static void binarySearch(int[] data, int n, int key) {
 		System.out.println(n + " " + data + " " + key);
 		if (n%2 == 0) {
 			int comparisons = 0;
@@ -74,6 +74,51 @@ class COMP108W03 {
 				System.out.println(key + " was not in the list");
 			}
 			
+		}
+	} */
+
+	/* static void binarySearch(int[] data, int n, int key) {
+		int first = 0;
+		int last = n-1;
+		boolean found = false;
+		int comparisons = 0;
+		int mid = (first + last)/2;
+		while (first <= last && found == false) {
+			comparisons++;
+			if (key == data[mid]) {
+				found = true;
+			} else {
+				if (key > data[mid]) {
+					first = mid;
+				} else {
+					last = mid ;
+				}
+			}
+
+			/* if (data[mid] > key) {
+				first = mid;
+				mid = (first + last)/2;
+			} else if (data[mid] < key) {
+				last = mid;
+				mid = (first+last)/2;
+			} else {
+				found = true;
+			} */
+		/* } 
+		if (found == true) {
+			System.out.println("Found " + key);
+			System.out.println("Number of comparisons required: " + comparisons);
+		} else {
+			System.out.println(key + " was not in the list");
+		}
+	} */
+
+	static void binarySearch(int[] data, int n, int key) {
+		int first = 0;
+		int last = n-1;
+		while (first <= last) {
+			int mid = (first + last)/2;
+			if (data[mid] > )
 		}
 	}
 
