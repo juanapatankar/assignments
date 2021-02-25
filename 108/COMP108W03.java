@@ -1,7 +1,8 @@
 //
-// Enter your name:
-// Enter your student ID:
+// Enter your name: Juana Patankar
+// Enter your student ID: 201471422
 //
+import java.util.Arrays;
 class COMP108W03 {
 
 	// print the content of an array of size n
@@ -40,6 +41,31 @@ class COMP108W03 {
 	// You can assume that data[] is already sorted
 	// refer to Lecture 6
 	static void binarySearch(int[] data, int n, int key) {
+		if (n%2 == 0) {
+			int comparisons = 0;
+			int first = 0;
+			int last = n;
+			boolean found = false;
+			while (first <= last && found == false && last != 0 && last < n) {
+				comparisons += 1;
+				if (key > data[last/2]) {
+					first = last/2;
+					data = Arrays.copyOfRange(data, first, last);
+				} else if (key < data[last/2]) {
+					last = last/2;
+					data = Arrays.copyOfRange(data, first, last);
+				} else {
+					found = true;
+				}
+			}
+			if (found == true) {
+				System.out.println("Found " + key);
+				System.out.println("Number of comparisons: " + comparisons);
+			} else {
+				System.out.println(key + " was not in the list");
+			}
+			
+		}
 	}
 
 	// print the smallest number in the array of size n
