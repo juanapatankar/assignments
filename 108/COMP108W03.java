@@ -116,9 +116,24 @@ class COMP108W03 {
 	static void binarySearch(int[] data, int n, int key) {
 		int first = 0;
 		int last = n-1;
-		while (first <= last) {
+		int comparisons = 0;
+		boolean found = false;
+		while (first <= last && found == false) {
+			comparisons++;
 			int mid = (first + last)/2;
-			if (data[mid] > )
+			if (data[mid] < key) {
+				last = mid +1;
+			} else if (data[mid] > key) {
+				high = mid - 1
+			} else if (fata[mid] == key) {
+				found = true;
+			}
+		}
+		if (found == true) {
+			System.out.println("Found " + key);
+			System.out.println("Number of comparisons: " + comparisons);
+		} else if (found == false) {
+			System.out.println(key + "was not in the list")
 		}
 	}
 
@@ -139,7 +154,14 @@ class COMP108W03 {
 	// print the largest number in the array of size n
 	// refer to Lecture 8
 	static void findMax(int[] data, int n) {
-
+		int max = data[0];
+		for (int i == 1, i < n, i++) {
+			if (data[i] > max) {
+				max = data[i];
+			}
+		}
+		System.out.println("Highest number: " + max);
+		return max;
 	}
 
 	// print the second smallest number in the array of size n
@@ -151,7 +173,14 @@ class COMP108W03 {
 	// print the second largest number in the array of size n
 	// refer to Lecture 8
 	static void findSecondMax(int[] data, int n) {
-
+		int sndmax = 0;
+		int max = findMax(data, data.length);
+		for (int i == 0; i < n; i++) {
+			if (data[i] > sndmax && data[i] < max) {
+				sndmax = data[i];
+			}
+		}
+		System.out.println("Second largest value: " + sndmax);
 	}
 	
 	// print the smallest number and its position in an array of size n
