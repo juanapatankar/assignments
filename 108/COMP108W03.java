@@ -3,7 +3,6 @@
 // Enter your student ID: 201471422
 //
 import java.util.Arrays;
-import java.lang.Math;
 class COMP108W03 {
 
 	// print the content of an array of size n
@@ -90,28 +89,32 @@ class COMP108W03 {
 				found = true;
 				break;
 			} else {
+				
 				if (data[mid] < key) {
 					System.out.println("2: " + data[mid]);
+					comparisons++;
 					first = mid+1;
+					System.out.println(comparisons + " after increm");
 				} else {
 					System.out.println("3: " + data[mid]);
-					//if ((last-first) % 2 == 0) {
 					if (n % 2 == 0) {
+						comparisons++;
 						last = mid - 1;
-					} else {
+						System.out.println(comparisons + " after increm if key less than midp");
+					} else { 
 						last = mid;
 					}
 					
 				}
 			}
-			comparisons++;
 		}
 		if (found == true) {
-			System.out.println("Found " + key);
+			System.out.println("Found " + key + " in the list");
 			System.out.println("Number of comparisons required: " + comparisons);
 		}
 		else {
-			System.out.println(key + " was not in the list");
+			System.out.println(key + " is not in the list");
+			System.out.println("Number of comparisons required: " + comparisons);
 		}
 	} 
 
@@ -146,7 +149,19 @@ class COMP108W03 {
 	// print the second smallest number in the array of size n
 	// refer to Lecture 8
 	static void findSecondMin(int[] data, int n) {
-
+		int min = data[0];
+		for (int i = 1; i < n; i++) {
+			if (data[i] < min) {
+				min = data[i];
+			}
+		}
+		int sndmin = 1000000000;
+		for (int i = 0; i < n; i++) {
+			if (data[i] > min && sndmin > data[i]) {
+				sndmin = data[i];
+			}
+		}
+		System.out.println("Second smallest value: " + sndmin);
 	}
 
 	// print the second largest number in the array of size n
@@ -172,10 +187,10 @@ class COMP108W03 {
 	// Find the bug and fix it by altering ONE line of code
 	static void bugOne(int[] data, int n) {
 		int i, pos, min;
-
+		System.out.println(Arrays.toString(data));
 		pos = 0;
-		min = data[0];
-		i = 1;
+		min = 0;
+		i = 0;
 		while (i < n) {
 			if (data[i] < min) {
 				min = data[i];
