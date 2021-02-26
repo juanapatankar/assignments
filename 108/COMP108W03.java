@@ -2,7 +2,7 @@
 // Enter your name: Juana Patankar
 // Enter your student ID: 201471422
 //
-import java.util.Arrays;
+
 class COMP108W03 {
 
 	// print the content of an array of size n
