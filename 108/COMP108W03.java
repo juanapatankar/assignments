@@ -95,7 +95,8 @@ class COMP108W03 {
 					first = mid+1;
 				} else {
 					System.out.println("3: " + data[mid]);
-					if (n % 2 == 1) {
+					//if ((last-first) % 2 == 0) {
+					if (n % 2 == 0) {
 						last = mid - 1;
 					} else {
 						last = mid;
