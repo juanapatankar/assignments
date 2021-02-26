@@ -81,22 +81,29 @@ class COMP108W03 {
 		int first = 0;
 		int last = n-1;
 		boolean found = false;
-		int comparisons = 0;
+		int comparisons = 1;
 		int mid = (first + last)/2;
-		while (first < last && found == false) {
+		while (first <= last && found == false) {
 			mid = (first+last)/2;
-			comparisons++;
-			if (key == data[mid]) {
+			if (data[mid] == key) {
+				System.out.println("1: " + data[mid]);
 				found = true;
 				break;
 			} else {
-				if (key > data[mid]) {
-					first = mid;
+				if (data[mid] < key) {
+					System.out.println("2: " + data[mid]);
+					first = mid+1;
 				} else {
-					last = mid;
+					System.out.println("3: " + data[mid]);
+					if (n % 2 == 1) {
+						last = mid - 1;
+					} else {
+						last = mid;
+					}
+					
 				}
 			}
-
+			comparisons++;
 		}
 		if (found == true) {
 			System.out.println("Found " + key);
