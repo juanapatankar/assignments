@@ -45,11 +45,12 @@ class COMP108W03 {
 		int first = 0;
 		int last = n-1;
 		boolean found = false;
-		int comparisons = 1;
+		int comparisons = 0;
 		int mid = (first + last)/2;
 		while (first <= last && found == false) {
 			mid = (first+last)/2;
 			if (data[mid] == key) {
+				comparisons++;
 				found = true;
 				break;
 			} else {
@@ -74,7 +75,7 @@ class COMP108W03 {
 		}
 		else {
 			System.out.println(key + " is not in the list");
-			System.out.println("Number of comparisons required: " + (comparisons-1));
+			System.out.println("Number of comparisons required: " + (comparisons));
 		}
 	} 
 
