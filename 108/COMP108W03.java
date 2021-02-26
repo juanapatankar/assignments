@@ -40,41 +40,6 @@ class COMP108W03 {
 	// data[] is an array in ascending order, n is size of array, key is the number we want to find
 	// You can assume that data[] is already sorted
 	// refer to Lecture 6
-	/* static void binarySearch(int[] data, int n, int key) {
-		System.out.println(n + " " + data + " " + key);
-		if (n%2 == 0) {
-			int comparisons = 0;
-			int first = 0;
-			int last = n-1;
-			int mid = (int) Math.floor((last)/2.0);
-			boolean found = false;
-			while (data.length != 1 && found == false) {
-				last = data.length - 1;
-				System.out.println(last);
-				first = 0;
-				mid = last/2;
-				comparisons += 1;
-				if (key > data[mid]) {
-					first = mid;
-					data = Arrays.copyOfRange(data, first, last);
-					first = 0;
-					
-				} else if (key < data[mid]) {
-					last = mid;
-					data = Arrays.copyOfRange(data, first, last);
-				
-				}
-			}
-			System.out.println(Arrays.toString(data));
-			if (data[0] == key) {
-				System.out.println("Found " + key);
-				System.out.println("Number of comparisons: " + comparisons);
-			} else if (data.length == 0) {
-				System.out.println(key + " was not in the list");
-			}
-			
-		}
-	} */
 
 	 static void binarySearch(int[] data, int n, int key) {
 		int first = 0;
@@ -156,6 +121,7 @@ class COMP108W03 {
 				sndmin = data[i];
 			}
 		}
+		System.out.println("Smallest value: " + min);
 		System.out.println("Second smallest value: " + sndmin);
 	}
 
@@ -175,6 +141,7 @@ class COMP108W03 {
 				sndmax = data[i];
 			}
 		}
+		System.out.println("Largest value: " + max);
 		System.out.println("Second largest value: " + sndmax);
 	}
 	
@@ -182,10 +149,10 @@ class COMP108W03 {
 	// Find the bug and fix it by altering ONE line of code
 	static void bugOne(int[] data, int n) {
 		int i, pos, min;
-		System.out.println(Arrays.toString(data));
+		
 		pos = 0;
 		min = data[0];
-		i = 0;
+		i = 1;
 		while (i < n) {
 			if (data[i] < min) {
 				min = data[i];
