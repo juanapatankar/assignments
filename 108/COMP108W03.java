@@ -85,22 +85,17 @@ class COMP108W03 {
 		while (first <= last && found == false) {
 			mid = (first+last)/2;
 			if (data[mid] == key) {
-				System.out.println("1: " + data[mid]);
 				found = true;
 				break;
 			} else {
 				
 				if (data[mid] < key) {
-					System.out.println("2: " + data[mid]);
 					comparisons++;
 					first = mid+1;
-					System.out.println(comparisons + " after increm");
 				} else {
-					System.out.println("3: " + data[mid]);
 					if (n % 2 == 0) {
 						comparisons++;
 						last = mid - 1;
-						System.out.println(comparisons + " after increm if key less than midp");
 					} else { 
 						last = mid;
 					}
@@ -114,7 +109,7 @@ class COMP108W03 {
 		}
 		else {
 			System.out.println(key + " is not in the list");
-			System.out.println("Number of comparisons required: " + comparisons);
+			System.out.println("Number of comparisons required: " + (comparisons-1));
 		}
 	} 
 
@@ -189,7 +184,7 @@ class COMP108W03 {
 		int i, pos, min;
 		System.out.println(Arrays.toString(data));
 		pos = 0;
-		min = 0;
+		min = data[0];
 		i = 0;
 		while (i < n) {
 			if (data[i] < min) {
