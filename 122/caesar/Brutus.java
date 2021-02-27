@@ -19,6 +19,6 @@ class Brutus {
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(count(args[0])));
+        System.out.println(Arrays.toString((count(args[0]))));
     }
 }
