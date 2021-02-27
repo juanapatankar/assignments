@@ -1,12 +1,12 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 class Caesar {
 
     public static char rotate(int shift, char input) {
-        ArrayList<Char> lowerletters = "abcdefghijklmnopqrstuvwxyz";
-        if (lowerletters.indexOf(shift) >= 0) {
-            return 'y';
+        String lowerletters = "abcdefghijklmnopqrstuvwxyz";
+        if (lowerletters.indexOf(input) != -1) {
+            return lowerletters.charAt(lowerletters.indexOf(input) + shift);
         } else {
-            return ' ';
+            return 'n';
         }
     }
 
@@ -15,6 +15,6 @@ class Caesar {
     }
 
     public static void main(String[] args) {
-        rotate(3, args[0]);
+        System.out.println(rotate(3, args[0].charAt(0)));
     }
 }
