@@ -41,7 +41,8 @@ class Caesar {
             System.out.println("No arguments given!");
             correctusage();
         } else if (args.length == 1) {
-            System.out.println("You've missed an argument!");
+            System.out.println(Brutus.decoded(args[0]));
+            System.out.println("\nYou've missed an argument if you wanted to encode!");
             correctusage();
         } else {
             System.out.println("Too many arguments");
