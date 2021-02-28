@@ -18,7 +18,23 @@ class Brutus {
         return lettercount;    
     }
 
+    public static double[] frequency(String input) {
+        double[] frequency = new double[26];
+        input = input.toLowerCase();
+        String lowerletters = "abcdefghijklmnopqrstuvwxyz";
+        for (int i=0; i < input.length(); i++) {
+            char stringchar = input.charAt(i);
+            if (lowerletters.indexOf(stringchar) != -1) {
+                int letterindex = lowerletters.indexOf(stringchar);
+                frequency[letterindex] += 1;
+            }
+        }
+        for (int i=0; i < 26; i++) {
+            frequency[i] /= input.length();
+        }
+        return frequency;
+    }
     public static void main(String[] args) {
-        System.out.println(Arrays.toString((count(args[0]))));
+        System.out.println(Arrays.toString((frequency(args[0]))));
     }
 }
