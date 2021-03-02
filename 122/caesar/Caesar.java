@@ -33,7 +33,7 @@ class Caesar {
         // initialise result to an empty string, to add the next character to. This character will be encoded if appropriate, after being tested when the rotate(int, char) method above is called
         String result = "";
         // This for loop is used to iterate through the input string
-        for (int i=0; i < input.length(); i++ ) {
+        for (int i = 0; i < input.length(); i++) {
             result += rotate(shift, input.charAt(i));
         }
         // Returns the encoded input, as a string. Preserves anything that isn't letters
