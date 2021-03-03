@@ -30,7 +30,7 @@ class Brutus {
         input = strip(input);
         String lowerletters = "abcdefghijklmnopqrstuvwxyz";
         // Iterate through each character in the input string. 
-        for (int i=0; i < input.length(); i++) {
+        for (int i = 0; i < input.length(); i++) {
             char stringchar = input.charAt(i);
             // If the character is a letter, it matches this with the correct position in lowerletters, so that the correct element in lettercount can be incremented. Otherwise, move onto the next character in the string
             int letterindex = lowerletters.indexOf(stringchar);
@@ -44,12 +44,12 @@ class Brutus {
         double[] frequency = new double[26];
         String lowerletters = "abcdefghijklmnopqrstuvwxyz";
         input = strip(input);
-        for (int i=0; i < input.length(); i++) {
+        for (int i = 0; i < input.length(); i++) {
             char stringchar = input.charAt(i);
             int letterindex = lowerletters.indexOf(stringchar);
             frequency[letterindex] += 1;
         }
-        for (int i=0; i < 26; i++) {
+        for (int i = 0; i < 26; i++) {
             frequency[i] /= input.length();
         }
         return frequency;
@@ -58,7 +58,7 @@ class Brutus {
     public static double chiSquared(double[] english, double[] cipher) {
         double[] chiSet = new double[26];
         for (int i = 0; i < 26; i++) {
-            chiSet[i] = (Math.pow((cipher[i] - english[i]), 2)/english[i]);
+            chiSet[i] = (Math.pow((cipher[i] - english[i]), 2) / english[i]);
         }
         double sum = 0.0;
         for (int i = 0; i < 26; i++) {
@@ -70,7 +70,7 @@ class Brutus {
     public static int positionofmin(double[] differences) {
         double minvalue = differences[0];
         int position = 0;
-        for (int i=0; i < differences.length; i++) {
+        for (int i = 0; i < differences.length; i++) {
             if (differences[i] < minvalue) {
                 minvalue = differences[i];
                 position = i;
@@ -93,8 +93,8 @@ class Brutus {
         }
 
         finalshift = positionofmin(chidiffs);
-        return(Caesar.rotate(finalshift, input));
-     }
+        return (Caesar.rotate(finalshift, input));
+    }
     public static void main(String[] args) {
         String encodedletters = strip(args[0]);
         int finalshift = 0;
