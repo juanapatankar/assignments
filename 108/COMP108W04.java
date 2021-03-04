@@ -1,6 +1,6 @@
 //
-// Enter your name:
-// Enter your student ID:
+// Enter your name: Juana Patankar
+// Enter your student ID: 201471422
 //
 import java.util.*;
 import java.io.*;
