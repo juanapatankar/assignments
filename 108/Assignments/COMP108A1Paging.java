@@ -30,7 +30,16 @@ class COMP108A1Paging {
 	// rArray is an array containing the requeset sequence with rSize entries
 	static COMP108A1Output noEvict(int[] cArray, int cSize, int[] rArray, int rSize) {
 		COMP108A1Output output = new COMP108A1Output();
-
+		for (int i = 0; i < rSize; i++) {
+			for (int j = 0; j < cSize; j++) {
+				if (cArray[j] == rArray[i]) {
+					output.hitPattern += "h";
+				} else {
+					output.hitPattern += "m";
+				}
+			}
+		}
+		System.out.println(output.hitPattern);
 		return output;
 	}
 
