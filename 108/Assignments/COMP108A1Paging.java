@@ -31,15 +31,20 @@ class COMP108A1Paging {
 	static COMP108A1Output noEvict(int[] cArray, int cSize, int[] rArray, int rSize) {
 		COMP108A1Output output = new COMP108A1Output();
 		for (int i = 0; i < rSize; i++) {
+			boolean foundReq = false;
 			for (int j = 0; j < cSize; j++) {
 				if (cArray[j] == rArray[i]) {
-					output.hitPattern += "h";
-				} else {
-					output.hitPattern += "m";
+					foundReq = true;
 				}
 			}
+			if (!foundReq) {
+				output.missCount++;
+				output.hitPattern += "m";
+			} else {
+				output.hitCount++;
+				output.hitPattern += "h";
+			}
 		}
-		System.out.println(output.hitPattern);
 		return output;
 	}
 
@@ -52,7 +57,25 @@ class COMP108A1Paging {
 	// rArray is an array containing the requeset sequence with rSize entries
 	static COMP108A1Output evictFIFO(int[] cArray, int cSize, int[] rArray, int rSize) {
 		COMP108A1Output output = new COMP108A1Output();
+		
+		int longestCache = 0;
+		for (int i = 0; i < rSize; i++) {
+			boolean foundReq = false;
+			for (int j = 0; j < cSize; j++) {
 
+				if (cArray[j] == rArray[i]) {
+					foundReq = true;
+				}
+			}
+			if (!foundReq) {
+				output.missCount++;
+				output.hitPattern += "m";
+				cArray[longestCache] = rArray[i];
+			} else {
+				output.hitCount++;
+				output.hitPattern += "h";
+			}
+		}
 		return output;
 	}
 
