@@ -48,6 +48,17 @@ class COMP108A1Paging {
 		return output;
 	}
 
+	private static int findLongestCacheIndex(int[] cacheCycles, int cacheSize) {
+		int longestIndex = 0;
+		int longestCycleValue = cacheCycles[0];
+		for (int i = 1; i < cacheSize; i++) {
+			if (cacheCycles[i] > longestCycleValue) {
+				longestCycleValue = cacheCycles[i];
+				longestIndex = i;
+			}
+		}
+		return longestIndex;
+	}
 	// evict FIFO
 	// Aim: 
 	// evict the number present in cache for longest time if next request is not in cache
@@ -57,12 +68,12 @@ class COMP108A1Paging {
 	// rArray is an array containing the requeset sequence with rSize entries
 	static COMP108A1Output evictFIFO(int[] cArray, int cSize, int[] rArray, int rSize) {
 		COMP108A1Output output = new COMP108A1Output();
-		
-		int longestCache = 0;
+		int indexToEvict = 0;
+		int[] cacheCycles = new int[3];
 		for (int i = 0; i < rSize; i++) {
 			boolean foundReq = false;
 			for (int j = 0; j < cSize; j++) {
-
+				cacheCycles[j]++;
 				if (cArray[j] == rArray[i]) {
 					foundReq = true;
 				}
@@ -70,7 +81,9 @@ class COMP108A1Paging {
 			if (!foundReq) {
 				output.missCount++;
 				output.hitPattern += "m";
-				cArray[longestCache] = rArray[i];
+				indexToEvict = findLongestCacheIndex(cacheCycles, cSize);
+				cArray[indexToEvict] = rArray[i];
+
 			} else {
 				output.hitCount++;
 				output.hitPattern += "h";
