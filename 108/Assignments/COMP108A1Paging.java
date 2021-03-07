@@ -71,6 +71,7 @@ class COMP108A1Paging {
 		int indexToEvict = 0;
 		int[] cacheCycles = new int[cSize];
 		for (int i = 0; i < rSize; i++) {
+			
 			boolean foundReq = false;
 			for (int j = 0; j < cSize; j++) {
 				cacheCycles[j]++;
@@ -83,6 +84,7 @@ class COMP108A1Paging {
 				output.hitPattern += "m";
 				indexToEvict = findLongestCacheIndex(cacheCycles, cSize);
 				cArray[indexToEvict] = rArray[i];
+				cacheCycles[indexToEvict] = 0;
 
 			} else {
 				output.hitCount++;

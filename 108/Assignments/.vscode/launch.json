@@ -12,6 +12,12 @@
         },
         {
             "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch)-COMP108A1PagingApp<Assignments_9f095226>",
             "request": "launch",
             "mainClass": "COMP108A1PagingApp",
