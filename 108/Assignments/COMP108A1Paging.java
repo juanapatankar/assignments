@@ -69,7 +69,7 @@ class COMP108A1Paging {
 	static COMP108A1Output evictFIFO(int[] cArray, int cSize, int[] rArray, int rSize) {
 		COMP108A1Output output = new COMP108A1Output();
 		int indexToEvict = 0;
-		int[] cacheCycles = new int[3];
+		int[] cacheCycles = new int[cSize];
 		for (int i = 0; i < rSize; i++) {
 			boolean foundReq = false;
 			for (int j = 0; j < cSize; j++) {
