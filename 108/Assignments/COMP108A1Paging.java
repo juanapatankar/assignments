@@ -138,10 +138,11 @@ class COMP108A1Paging {
 		return output;
 	}
 
-	private static int[] generateDistances(int[] cArray, int cSize, int[] rArray, int rSize) {
+	private static int[] generateDistances(int[] cArray, int cSize, int[] rArray, int rSize, int startCountIndex) {
+		//change rArray to start from target!
 		int[] nextCall = new int[cSize];
 		for (int i = 0; i < cSize; i++) {
-			for (int j = 0; j < rSize; j++) {
+			for (int j = startCountIndex; j < rSize; j++) {
 				nextCall[i]++;
 				if (rArray[j] == cArray[i]) {
 					nextCall[i]--;
@@ -174,6 +175,7 @@ class COMP108A1Paging {
 	static COMP108A1Output evictLFD(int[] cArray, int cSize, int[] rArray, int rSize) {
 		COMP108A1Output output = new COMP108A1Output();
 		int indexToEvict = 0;
+		int target = 0;
 		int[] nextCall = new int[cSize];
 		for (int i = 0; i < rSize; i++) {
 			boolean foundReq = false;
@@ -185,7 +187,8 @@ class COMP108A1Paging {
 			if (!foundReq) {
 				output.missCount++;
 				output.hitPattern += "m";
-				nextCall = generateDistances(cArray, cSize, rArray, rSize);
+				target = i;
+				nextCall = generateDistances(cArray, cSize, rArray, rSize, target);
 				indexToEvict = findFurthestIndex(nextCall, cSize);
 				cArray[indexToEvict] = rArray[i];
 			} else {
