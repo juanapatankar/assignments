@@ -3,22 +3,55 @@
 
 int main(void) {
 	// Declare variables here (C syntax)
+	char fmt[] = "%d%";
+	char msg[] = "How many numbers: ";
+	int totalNum;
+
 	char input[] = "Enter a number: ";
-	char posCount[] = "Number of positive integers: %d";
-	char negCount[] = "Number of negative integers: %d";
-	char zeroCount[] = "Number of zeroes: %d";
-	int n = 0;
+	int nextNum;
+
+	int posCount = 0;
+	int negCount = 0;
+	int zeroCount = 0;
+
+
 	_asm {
 		// Put assembly code here
+		lea ecx, msg
+		push ecx
+		call printf
+		pop ecx
+		lea ecx, totalNum
+		push ecx
+		lea ecx, fmt		;waas
+		push ecx
+		call scanf
+		add esp, 8
 		
-		lea eax, input
+	getInput: lea eax, input
 		push eax
 		call printf
-		add esp, 4
-		lea eax, n
+		pop eax
+		lea eax, nextNum
+		push eax
+		lea eax, fmt
 		push eax
 		call scanf
-		add esp, 4
+		add esp, 8
+		lea eax, nextNum
+		
+
+		lea ebx
+	zero: lea ebx, zeroCount
+		push ebx
+		inc ebx
+		push ebx
+
+
+		
+
+
+
 	}
 	return 0;
 }
