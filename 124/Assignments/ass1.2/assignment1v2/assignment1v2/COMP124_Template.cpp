@@ -11,11 +11,12 @@ int main(void) {
 	char posmsg[] = "Number of +ves: ";
 	char negmsg[] = "Number of -ves: ";
 	char newln[] = "\n";
+	char ifmt[] = "%s";
 	char fmt[] = "%d";
 	int remaining = 0;
-	int zero = 1;
-	int pos = 0;
-	int neg = 0;
+	int zerocount = 2;
+	int poscount = 0;
+	int negcount = 0;
 	int current = 0;
 
 	_asm {
@@ -23,23 +24,34 @@ int main(void) {
 		lea eax, msg
 		push eax
 		call printf
-		add esp, 8
-		lea eax, remaining
-		push eax
+		pop eax
+		lea ebx, remaining
+		push ebx
 		lea eax, fmt
 		push eax
 		call scanf
-		lea ecx, remaining
-		add esp, 8
-		push ecx
+		pop eax
+		pop ebx
+		mov ebx, remaining
 		jmp newnumber
-		jz output
-		
+
+	incpos:
+		add [poscount], 1
+		jmp outornew
+
+	incneg:
+		add [negcount], 1
+		jmp outornew
+
+	inczero:
+		add [zerocount], 1
+		jmp outornew
 
 	newnumber:
 		lea eax, getInput
 		push eax
 		call printf
+		pop eax
 		lea eax, current
 		push eax
 		lea eax, fmt
@@ -47,22 +59,33 @@ int main(void) {
 		call scanf
 		pop eax
 		pop eax
-		mov ecx, eax
-		sub [ecx], 1
-		mov ecx, eax
-		push eax
-		jmp newnumber
+		mov eax, current
+		sub ebx, 1				; restart loop to get next number, or print output
+		mov eax, ebx
+		cmp current, 0
+		jg incpos
+		jl incneg
+		je inczero
+
+	outornew:
+		cmp ebx, 0
 		jz output
+		jmp newnumber
+	
+	
+	
+
+	
 
 	output: 
 		lea eax, zeromsg
 		push eax
 		call printf
 		pop eax
-		lea eax, zero
+		lea eax, ifmt
 		push eax
-		lea eax, fmt
-		push eax
+		lea ebx, zerocount
+		push ebx
 		call printf
 		pop eax
 		pop eax
@@ -74,9 +97,9 @@ int main(void) {
 		push eax
 		call printf
 		pop eax
-		lea eax, pos
+		lea eax, poscount
 		push eax
-		lea eax, fmt
+		lea eax, ifmt
 		push eax
 		call printf
 		pop eax
@@ -89,9 +112,9 @@ int main(void) {
 		push eax
 		call printf
 		pop eax
-		lea eax, neg
+		lea eax, negcount
 		push eax
-		lea eax, fmt
+		lea eax, ifmt
 		call printf
 		pop eax
 		pop eax
