@@ -73,7 +73,7 @@ int main(void) {
 		jmp newnumber
 	
 	
-	
+	//gleepeeeeeeeeeeeeeeeeeey
 
 	
 
