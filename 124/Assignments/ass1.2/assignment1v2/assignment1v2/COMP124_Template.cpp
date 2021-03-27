@@ -14,7 +14,7 @@ int main(void) {
 	char ifmt[] = "%s";
 	char fmt[] = "%d";
 	int remaining = 0;
-	int zerocount = 2;
+	int zerocount = 0;
 	int poscount = 0;
 	int negcount = 0;
 	int current = 0;
