@@ -11,7 +11,7 @@ int main(void) {
 	char posmsg[] = "Number of +ves: ";
 	char negmsg[] = "Number of -ves: ";
 	char newln[] = "\n";
-	char ifmt[] = "%s";
+	char ifmt[] = "%i";
 	char fmt[] = "%d";
 	int remaining = 0;
 	int zerocount = 0;
@@ -73,7 +73,6 @@ int main(void) {
 		jmp newnumber
 	
 	
-	
 
 	
 
@@ -82,13 +81,17 @@ int main(void) {
 		push eax
 		call printf
 		pop eax
-		lea eax, ifmt
+
+
+		
+		mov eax, [zerocount]
 		push eax
-		lea ebx, zerocount
-		push ebx
+		lea eax, fmt
+		push eax
 		call printf
 		pop eax
 		pop eax
+
 		lea eax, newln
 		push eax
 		call printf
@@ -97,13 +100,15 @@ int main(void) {
 		push eax
 		call printf
 		pop eax
-		lea eax, poscount
+		
+		mov eax, [poscount]
 		push eax
-		lea eax, ifmt
+		lea eax, fmt
 		push eax
 		call printf
 		pop eax
 		pop eax
+
 		lea eax, newln
 		push eax
 		call printf
@@ -112,21 +117,19 @@ int main(void) {
 		push eax
 		call printf
 		pop eax
-		lea eax, negcount
+		
+		mov eax, [negcount]
 		push eax
-		lea eax, ifmt
+		lea eax, fmt
+		push eax
 		call printf
 		pop eax
 		pop eax
+
 		lea eax, newln
 		push eax
 		call printf
 		pop eax
-
-
-	
-
-
 	}
 return 0;
 }
