@@ -33,7 +33,9 @@ int main(void) {
 		pop eax
 		pop ebx
 		mov ebx, remaining
-		jmp newnumber
+		cmp ebx, 0
+		jg newnumber
+		jmp output
 
 	incpos:
 		add [poscount], 1
