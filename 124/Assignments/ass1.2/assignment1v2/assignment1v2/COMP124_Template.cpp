@@ -10,9 +10,9 @@ int main(void) {
 	char getInput[] = "Enter a number: ";
 
 	// Declare messages for each count output
-	char zeromsg[] = "\nNumber of 0s: ";
-	char posmsg[] = "\nNumber of +ves: ";
-	char negmsg[] = "\nNumber of -ves: ";
+	char zeromsg[] = "\nNumber of 0s: %d";
+	char posmsg[] = "\nNumber of +ves: %d";
+	char negmsg[] = "\nNumber of -ves: %d";
 	char fmt[] = "%d";
 	
 	// Declare variables to store counts, and the current number
@@ -41,7 +41,7 @@ int main(void) {
 		jmp output					; receive the first number, or jump straight to output
 
 	incpos:
-		add[poscount], 1
+		add [poscount], 1
 		jmp outornew
 
 	incneg:
@@ -67,15 +67,14 @@ int main(void) {
 		pop eax
 		pop eax
 
-		mov eax, current
 		
-		cmp current, 0				; test if the inputted number is positive, negative, or zero
-		jg incpos					;jumps to increment the approporiate count
+		cmp current, 0				; test if pos/neg/zero input
+		jg incpos					; jumps to increment the approporiate count
 		jl incneg
 		je inczero
 
 	outornew:
-		cmp ebx, 0					; tests if there are more numbers to input
+		cmp ebx, 0					; tests if more numbers to input
 		jz output					; output counts if no more numbers
 		jmp newnumber				; get the next input (loop)
 	
@@ -84,46 +83,30 @@ int main(void) {
 	
 
 	output: 
-		lea eax, zeromsg			; print label(zero count)
-		push eax
-		call printf
-		pop eax
-
 		mov eax, [zerocount]
 		push eax
-		lea eax, fmt
-		push eax
-		call printf					; print how many zeroes were inputted
-		pop eax
-		pop eax
-			
-		lea eax, posmsg				; print label(positive count)
+		lea eax, zeromsg			; print number of zeroes
 		push eax
 		call printf
 		pop eax
-
+		pop eax
+		
 		mov eax, [poscount]
 		push eax
-		lea eax, fmt
-		push eax
-		call printf					; print how many numbers were positive
-		pop eax
-		pop eax
-
-		lea eax, negmsg				; print label, negative count
+		lea eax, posmsg				; print labelled number of positive integers
 		push eax
 		call printf
 		pop eax
-			
-		mov eax, [negcount]
-		push eax
-		lea eax, fmt
-		push eax
-		call printf					; print total number of negative integers
-		pop eax
 		pop eax
 
-		
+		mov eax, [negcount]
+		push eax
+		lea eax, negmsg				; print labelled neg count
+		push eax
+		call printf
+		pop eax
+		pop eax
+			
 	}
 return 0;
 }
