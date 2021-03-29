@@ -65,9 +65,8 @@ int main(void) {
 		push eax
 		call scanf					; store the inputted number to current
 		pop eax
-		pop eax
+		pop eax		
 
-		
 		cmp current, 0				; test if pos/neg/zero input
 		jg incpos					; jumps to increment the approporiate count
 		jl incneg
@@ -78,10 +77,6 @@ int main(void) {
 		jz output					; output counts if no more numbers
 		jmp newnumber				; get the next input (loop)
 	
-	
-
-	
-
 	output: 
 		mov eax, [zerocount]
 		push eax
