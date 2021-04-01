@@ -47,7 +47,7 @@ print_maze f = putStrLn(unlines f)
 -- Question 3
 
 is_wall :: [String] -> (Int, Int) -> Bool
-is_wall m (x,y)  = if (get m x y) == '#' then True else False 
+is_wall m (x,y)  = get m x y == '#'  
 
 -- Question 4
 
@@ -70,7 +70,7 @@ move (x,y) c
 -- Question 6
 
 can_move :: [String] -> (Int, Int) -> Char -> Bool
-can_move m (x,y) c = if is_wall m (move (x,y) c) == True then False else True
+can_move m (x,y) c = not is_wall m (move (x,y) c)
 
 -- Question 7
 
