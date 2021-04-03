@@ -1,5 +1,6 @@
 public class MonoAlphaSubstitution {
     public char[] translate;
+    public static char[] maptable;
     public MonoAlphaSubstitution() {
         translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     }
@@ -30,12 +31,16 @@ public class MonoAlphaSubstitution {
         return maptable[letter];
     }
     public static void main(String[] args) {
-        MonoAlphaSubstitution f = new MonoAlphaSubstitution();
-        String fdone = String.valueOf(f.translate);
-        final char[] maptable = f.translate;
-        System.out.println(fdone);
-        MonoAlphaSubstitution g = new MonoAlphaSubstitution("abbccd");
-        String gdone = String.valueOf(g.translate);
-        System.out.println(gdone);
+        MonoAlphaSubstitution tr;
+        if (args.length == 1) {
+            tr = new MonoAlphaSubstitution();
+            System.out.println(tr.translate[letterToNumber((args[0]).charAt(0))]);
+        } else {
+            tr = new MonoAlphaSubstitution(args[0]);
+            System.out.println(tr.translate[letterToNumber((args[1]).charAt(0))]);
+        }
+        char[] maptable = tr.translate;
+        
+      //  System.out.println(encrypt('a'));
     }
 }
