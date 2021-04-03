@@ -17,4 +17,6 @@ abstract class Substitution implements Cipher {
         return decoded;
     }
 
+    
+
 }
