@@ -37,13 +37,21 @@ public class MonoAlphaSubstitution {
             if (args.length == 2) {
                 tr = new MonoAlphaSubstitution();
                 maptable = tr.translate;
-                done = encrypt(args[1].charAt(0), tr, maptable);
+                /* for (int i = 0; i < args[1].length(); i++) {
+                    done = encrypt(args[1].charAt(i), tr, maptable);
+                    System.out.print(done);
+                } */
+               
             } else {
                 tr = new MonoAlphaSubstitution(args[1]);
                 maptable = tr.translate;
+                System.out.println(String.valueOf(maptable));
                 done = encrypt(args[2].charAt(0), tr, maptable);
+               /*  for (int i = 0; i < args[2].length(); i++) {
+                    done = encrypt(args[1].charAt(i), tr, maptable);
+                    System.out.print(done);
+                } */
             }
-            System.out.println(done);
         }
         
         
