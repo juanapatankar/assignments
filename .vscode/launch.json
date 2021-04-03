@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - MonoAlphaSubstitution",
+            "request": "launch",
+            "mainClass": "MonoAlphaSubstitution",
+            "projectName": "assignments_94599825"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Substitution",
             "request": "launch",
             "mainClass": "Substitution",
