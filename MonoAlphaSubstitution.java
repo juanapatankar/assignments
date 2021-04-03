@@ -11,7 +11,6 @@ public class MonoAlphaSubstitution {
             char decoded = mapping.charAt(i-1);
             int decodepos = letterToNumber(decoded);
             translate[decodepos] = encoded;
-            
         }
         
     }
@@ -25,9 +24,15 @@ public class MonoAlphaSubstitution {
         }
         return pos;
     }
+
+    public static char encrypt (char toChange) {
+        int letter = letterToNumber(toChange);
+        return maptable[letter];
+    }
     public static void main(String[] args) {
         MonoAlphaSubstitution f = new MonoAlphaSubstitution();
         String fdone = String.valueOf(f.translate);
+        final char[] maptable = f.translate;
         System.out.println(fdone);
         MonoAlphaSubstitution g = new MonoAlphaSubstitution("abbccd");
         String gdone = String.valueOf(g.translate);
