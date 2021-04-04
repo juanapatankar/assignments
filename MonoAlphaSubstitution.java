@@ -1,4 +1,4 @@
-public class MonoAlphaSubstitution {
+public class MonoAlphaSubstitution extends Substitution {
     public char[] translate;
     public MonoAlphaSubstitution() {
         translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
@@ -9,8 +9,7 @@ public class MonoAlphaSubstitution {
         for (int i = 1; i < mapping.length(); i+=2) {
             char encoded = mapping.charAt(i);
             char decoded = mapping.charAt(i-1);
-            int decodepos = letterToNumber(decoded);
-            translate[decodepos] = encoded;
+           translate[letterToNumber(decoded)] = encoded; 
         }
         
     }
@@ -25,18 +24,39 @@ public class MonoAlphaSubstitution {
         return pos;
     }
 
-    public static char encrypt (char toChange, MonoAlphaSubstitution tr, char[] maptable) {
-        int letter = letterToNumber(toChange);
-        return maptable[letter];
+    public char encrypt (char toChange) {
+        int letter;
+        Boolean cap = false;
+        String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (caps.contains(Character.toString(toChange))) {
+            cap = true;
+            toChange = Character.toLowerCase(toChange);
+        }
+        letter = letterToNumber(toChange);
+        if (toChange == ' ') {
+            return ' ';
+        } else {
+            if (!cap) {
+                return translate[letter];
+            } else {
+                return Character.toUpperCase(translate[letter]);
+            }
+            
+        }
+    }
+
+    public char decrypt(char toChange) {
+        return 'a';
     }
     public static void main(String[] args) {
         MonoAlphaSubstitution tr;
-        char done;
+        String done;
         char[] maptable;
         if (args[0].contains("encrypt")) {
             if (args.length == 2) {
                 tr = new MonoAlphaSubstitution();
                 maptable = tr.translate;
+                System.out.println(String.valueOf(maptable));
                 /* for (int i = 0; i < args[1].length(); i++) {
                     done = encrypt(args[1].charAt(i), tr, maptable);
                     System.out.print(done);
@@ -46,11 +66,13 @@ public class MonoAlphaSubstitution {
                 tr = new MonoAlphaSubstitution(args[1]);
                 maptable = tr.translate;
                 System.out.println(String.valueOf(maptable));
-                done = encrypt(args[2].charAt(0), tr, maptable);
-               /*  for (int i = 0; i < args[2].length(); i++) {
-                    done = encrypt(args[1].charAt(i), tr, maptable);
-                    System.out.print(done);
-                } */
+                for (int i = 0; i < args[2].length(); i++) {
+                    System.out.print(tr.encrypt(args[2].charAt(i)));
+                }
+                // for (int i = 0; i < args[2].length(); i++) {
+                  //  done = tr.encrypt(args[1].charAt(i));
+                    //System.out.print(done);
+                } 
             }
         }
         
@@ -58,4 +80,3 @@ public class MonoAlphaSubstitution {
         
       //  System.out.println(encrypt('a'));
     }
-}
