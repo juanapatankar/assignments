@@ -50,18 +50,18 @@ public class MonoAlphaSubstitution extends Substitution {
     }
     public static void main(String[] args) {
         MonoAlphaSubstitution tr;
-        String done;
-        char[] maptable;
+        String done = "";
         if (args[0].contains("encrypt")) {
             if (args.length == 2) {
                 System.out.println(args[1]);
                
             } else {
                 tr = new MonoAlphaSubstitution(args[1]);
-                maptable = tr.translate;
                 for (int i = 0; i < args[2].length(); i++) {
-                    System.out.print(tr.encrypt(args[2].charAt(i)));
+                    done += tr.encrypt(args[2].charAt(i));
+                   // System.out.print(tr.encrypt(args[2].charAt(i)));          this is for if don't need output as string
                 }
+                System.out.println(done);
             } 
         }
     }
