@@ -54,29 +54,15 @@ public class MonoAlphaSubstitution extends Substitution {
         char[] maptable;
         if (args[0].contains("encrypt")) {
             if (args.length == 2) {
-                tr = new MonoAlphaSubstitution();
-                maptable = tr.translate;
-                System.out.println(String.valueOf(maptable));
-                /* for (int i = 0; i < args[1].length(); i++) {
-                    done = encrypt(args[1].charAt(i), tr, maptable);
-                    System.out.print(done);
-                } */
+                System.out.println(args[1]);
                
             } else {
                 tr = new MonoAlphaSubstitution(args[1]);
                 maptable = tr.translate;
-                System.out.println(String.valueOf(maptable));
                 for (int i = 0; i < args[2].length(); i++) {
                     System.out.print(tr.encrypt(args[2].charAt(i)));
                 }
-                // for (int i = 0; i < args[2].length(); i++) {
-                  //  done = tr.encrypt(args[1].charAt(i));
-                    //System.out.print(done);
-                } 
-            }
+            } 
         }
-        
-        
-        
-      //  System.out.println(encrypt('a'));
     }
+}
