@@ -43,14 +43,38 @@ public class Caesar extends MonoAlphaSubstitution {
         }
     }
 
+    public static int findIndex(char toFind, char[] mapping) {
+        for (int i = 0; i < mapping.length; i++) {
+            if (mapping[i] == toFind) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public char decrypt(char toChange) {
-        return encrypt(toChange);
+        String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Boolean cap = false;
+        if (caps.contains(Character.toString(toChange))) {
+            cap = true;
+            toChange = Character.toLowerCase(toChange);
+        }
+        if (isLetter(toChange)) {
+            int letter = findIndex(toChange, translate);
+            if (!cap) {
+                return alphabet.charAt(letter);
+            } else {
+                return Character.toUpperCase(alphabet.charAt(letter));
+            }
+        } else {
+            return toChange;
+        }
     }
 
     
     public static void main(String[] args) {
         Boolean valid = false;
-        Caesar tr = new Caesar();
+        
         if (args.length < 3) {
             System.out.println("Too few parameters!\nUsage: java Caesar encrypt n \"cipher text\"");
         } else if (args.length > 3) {
@@ -61,18 +85,20 @@ public class Caesar extends MonoAlphaSubstitution {
         if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
             System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Caesar encrypt key \"cipher text\"");
         }
-
-        if (args[0].contains("encrypt")) {
-            tr = new Caesar(Integer.parseInt(args[1]));
-        } else if (args[0].contains("decrypt")) {
-            tr = new Caesar(-(Integer.parseInt(args[1])));
-        }
-
-        if (valid) {
+        
+        if (args[0].contains("encrypt") && valid) {
             String done = "";
-            
+            Caesar tr = new Caesar(Integer.parseInt(args[1]));
             for (int i = 0; i < args[2].length(); i++) {
                 done += tr.encrypt(args[2].charAt(i));
+            }
+            System.out.println(done);
+        }
+        if (args[0].contains("decrypt") && valid) {
+            Caesar tr = new Caesar(Integer.parseInt(args[1]));
+            String done = "";
+            for (int i = 0; i < args[2].length(); i++) {
+                done += tr.decrypt(args[2].charAt(i));
             }
             System.out.println(done);
         }
