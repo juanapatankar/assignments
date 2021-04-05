@@ -93,7 +93,7 @@ public class MonoAlphaSubstitution extends Substitution {
         }
 
         if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
-            System.out.println("The first paramater must be \"encrypt\" or \"decrypt\"!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
+            System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
         }
 
         MonoAlphaSubstitution tr;
