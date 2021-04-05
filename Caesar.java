@@ -83,7 +83,7 @@ public class Caesar extends MonoAlphaSubstitution {
             valid = true;
         }
         if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
-            System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Caesar encrypt key \"cipher text\"");
+            System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Caesar encrypt n \"cipher text\"");
         }
         
         if (args[0].contains("encrypt") && valid) {
