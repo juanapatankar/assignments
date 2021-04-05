@@ -82,21 +82,28 @@ public class MonoAlphaSubstitution extends Substitution {
         }
     }
     public static void main(String[] args) {
+        Boolean valid = false;
+        if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
+            System.out.println("The first paramater must be \"encrypt\" or \"decrypt\"!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
+        }
+        if (args.length < 3) {
+            System.out.println("Too few paramenters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
+        } else if (args.length > 3) {
+            System.out.println("Too many paramenters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
+        } else {
+            valid = true;
+        }
+
         MonoAlphaSubstitution tr;
         String done = "";   // Need to sort error messages
-        if (args[0].contains("encrypt")) {
-            if (args.length == 2) {
-                System.out.println(args[1]);
-               
-            } else {        // implement decrypt
-                tr = new MonoAlphaSubstitution(args[1]);
-                for (int i = 0; i < args[2].length(); i++) {
-                    done += tr.encrypt(args[2].charAt(i));
-                }
-                System.out.println(done);
-            } 
+        if (args[0].contains("encrypt") && valid) {
+            tr = new MonoAlphaSubstitution(args[1]);
+            for (int i = 0; i < args[2].length(); i++) {
+                done += tr.encrypt(args[2].charAt(i));
+            }
+            System.out.println(done);
         }
-        if (args[0].contains("decrypt")) {
+        if (args[0].contains("decrypt") && valid) {
             if (args.length == 2) {
                 System.out.println(args[1]);
             } else {
@@ -107,5 +114,7 @@ public class MonoAlphaSubstitution extends Substitution {
                 System.out.println(done);
             }
         }
+
+        
     }
 }
