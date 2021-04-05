@@ -85,9 +85,9 @@ public class MonoAlphaSubstitution extends Substitution {
         Boolean valid = false;
         
         if (args.length < 3) {
-            System.out.println("Too few paramenters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
+            System.out.println("Too few parameters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
         } else if (args.length > 3) {
-            System.out.println("Too many paramenters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
+            System.out.println("Too many parameters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
         } else {
             valid = true;
         }
