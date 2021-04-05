@@ -43,6 +43,10 @@ public class Caesar extends MonoAlphaSubstitution {
         }
     }
 
+    public char decrypt(char toChange) {
+        return encrypt(toChange);
+    }
+
     
     public static void main(String[] args) {
         Boolean valid = false;
@@ -70,7 +74,7 @@ public class Caesar extends MonoAlphaSubstitution {
             String done = "";
             Caesar tr = new Caesar(-(Integer.parseInt(args[1])));
             for (int i = 0; i < args[2].length(); i++) {
-                done += tr.encrypt(args[2].charAt(i));
+                done += tr.decrypt(args[2].charAt(i));
             }
             System.out.println(done);
         }
