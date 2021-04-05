@@ -50,7 +50,7 @@ public class Caesar extends MonoAlphaSubstitution {
     
     public static void main(String[] args) {
         Boolean valid = false;
-        
+        Caesar tr = new Caesar();
         if (args.length < 3) {
             System.out.println("Too few parameters!\nUsage: java Caesar encrypt n \"cipher text\"");
         } else if (args.length > 3) {
@@ -59,22 +59,20 @@ public class Caesar extends MonoAlphaSubstitution {
             valid = true;
         }
         if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
-            System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
+            System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Caesar encrypt key \"cipher text\"");
         }
 
-        if (args[0].contains("encrypt") && valid) {
+        if (args[0].contains("encrypt")) {
+            tr = new Caesar(Integer.parseInt(args[1]));
+        } else if (args[0].contains("decrypt")) {
+            tr = new Caesar(-(Integer.parseInt(args[1])));
+        }
+
+        if (valid) {
             String done = "";
-            Caesar tr = new Caesar(Integer.parseInt(args[1]));
+            
             for (int i = 0; i < args[2].length(); i++) {
                 done += tr.encrypt(args[2].charAt(i));
-            }
-            System.out.println(done);
-        }
-        if (args[0].contains("decrypt") && valid) {
-            String done = "";
-            Caesar tr = new Caesar(-(Integer.parseInt(args[1])));
-            for (int i = 0; i < args[2].length(); i++) {
-                done += tr.decrypt(args[2].charAt(i));
             }
             System.out.println(done);
         }
