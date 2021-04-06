@@ -67,8 +67,39 @@ class Vigenere extends Substitution {
         }
         
     }
+    public static int findIndex(char toFind, char[] mapping) {
+        for (int i = 0; i < mapping.length; i++) {
+            if (mapping[i] == toFind) {
+                return i;
+            }
+        }
+        return -1;
+    }
     public char decrypt(char toChange) {
-        return 'a';
+        if (mapping == "") {
+            return toChange;
+        }
+        mappos = position % mapping.length();
+        String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Boolean cap = false;
+        if (caps.contains(Character.toString(toChange))) {
+            cap = true;
+            toChange = Character.toLowerCase(toChange);
+        }
+        position++;
+        if (isLetter(toChange) && position <= mapping.length()) {
+            int letter = findIndex(toChange, translate[mappos]);
+            toChange = alphabet.charAt(letter);
+            // switch between caps/lowercase:
+            if (!cap) {
+                return toChange;
+            } else {
+                return Character.toUpperCase(toChange);
+            }
+        } else {
+            return toChange;
+        }
+        
     }
     public static void main(String[] args) {
         Vigenere tr;
@@ -80,6 +111,12 @@ class Vigenere extends Substitution {
             System.out.println("Too many parameters!\nUsage: java Vigenere encrypt key \"cipher text\"");
         } else if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
             System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Vigenere encrypt key \"cipher text\"");
+        } else if (args[0].contains("decrypt")) {
+            tr = new Vigenere(args[1].toLowerCase());
+            for (int i = 0; i < args[2].length(); i++) {
+                done += tr.encrypt(args[2].charAt(i));
+            }
+            System.out.println(done);
         } else {
             if (args[0].contains("encrypt")) {
                 tr = new Vigenere(args[1].toLowerCase());
