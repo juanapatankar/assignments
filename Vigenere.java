@@ -5,6 +5,7 @@ class Vigenere extends Substitution {
     public String mapping;
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     public Vigenere() {
+        mapping = "";
         translate = new char[][] {{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}};
     }
     public Vigenere(String mapping) {
@@ -41,6 +42,9 @@ class Vigenere extends Substitution {
         return false;
     }
     public char encrypt(char toChange) {
+        if (mapping == "") {
+            return toChange;
+        }
         mappos = position % mapping.length();
         String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Boolean cap = false;
