@@ -103,8 +103,6 @@ class Vigenere extends Substitution {
     }
     public static void main(String[] args) {
         Vigenere tr;
-        String done = "";
-
         if (args.length < 3) {
             System.out.println("Too few parameters!\nUsage: java Vigenere encrypt key \"cipher text\"");
         } else if (args.length > 3) {
