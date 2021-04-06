@@ -8,8 +8,8 @@ class Vigenere extends Substitution {
         mapping = "";
         translate = new char[][] {{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}};
     }
-    public Vigenere(String mapping) {
-        this.mapping = mapping.toLowerCase();
+    public Vigenere(String map) {
+        this.mapping = map.toLowerCase();
         translate = new char[mapping.length()][26];
         for (int i = 0; i < mapping.length(); i++) {
             int shift = letterToNumber(mapping.charAt(i));
@@ -112,14 +112,14 @@ class Vigenere extends Substitution {
         } else if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
             System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Vigenere encrypt key \"cipher text\"");
         } else if (args[0].contains("decrypt")) {
-            tr = new Vigenere(args[1].toLowerCase());
+            tr = new Vigenere(args[1]);
             for (int i = 0; i < args[2].length(); i++) {
                 done += tr.decrypt(args[2].charAt(i));
             }
             System.out.println(done);
         } else {
             if (args[0].contains("encrypt")) {
-                tr = new Vigenere(args[1].toLowerCase());
+                tr = new Vigenere(args[1]);
                 for (int i = 0; i < args[2].length(); i++) {
                     done += tr.encrypt(args[2].charAt(i));
                 }
