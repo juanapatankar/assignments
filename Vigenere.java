@@ -9,7 +9,7 @@ class Vigenere extends Substitution {
         translate = new char[][] {{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}};
     }
     public Vigenere(String mapping) {
-        this.mapping = mapping;
+        this.mapping = mapping.toLowerCase();
         translate = new char[mapping.length()][26];
         for (int i = 0; i < mapping.length(); i++) {
             int shift = letterToNumber(mapping.charAt(i));
