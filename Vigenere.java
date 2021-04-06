@@ -1,6 +1,7 @@
 class Vigenere extends Substitution {
     public char[][] translate;
-    public int position;
+    public int position = 0;
+    public int mappos;
     public String mapping;
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     public Vigenere() {
@@ -20,7 +21,6 @@ class Vigenere extends Substitution {
                 translate[i][j] = newchar;
             }
         }
-        position = 0;
 
     }
     public static int letterToNumber(char toFind) {
@@ -41,20 +41,16 @@ class Vigenere extends Substitution {
         return false;
     }
     public char encrypt(char toChange) {
+        mappos = position % mapping.length();
         String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Boolean cap = false;
         if (caps.contains(Character.toString(toChange))) {
             cap = true;
             toChange = Character.toLowerCase(toChange);
         }
-        if (isLetter(toChange)) {
-            int mappos = this.position;
-            if (mappos != 0) {
-                mappos = mapping.length() % position;
-            }
-            this.position++;
+        position++;
+        if (isLetter(toChange) && position <= mapping.length()) {
             int letter = letterToNumber(toChange);
-            System.out.println(mappos);
             toChange = translate[mappos][letter];
             // switch between caps/lowercase:
             if (!cap) {
@@ -65,6 +61,7 @@ class Vigenere extends Substitution {
         } else {
             return toChange;
         }
+        
     }
     public char decrypt(char toChange) {
         return 'a';
