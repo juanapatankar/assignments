@@ -55,12 +55,12 @@ class Vigenere extends Substitution {
         position++;
         if (isLetter(toChange) && position <= mapping.length()) {
             int letter = letterToNumber(toChange);
-            toChange = translate[mappos][letter];
+            char changed = translate[mappos][letter];
             // switch between caps/lowercase:
             if (!cap) {
-                return toChange;
+                return changed;
             } else {
-                return Character.toUpperCase(toChange);
+                return Character.toUpperCase(changed);
             }
         } else {
             return toChange;
@@ -89,12 +89,12 @@ class Vigenere extends Substitution {
         position++;
         if (isLetter(toChange) && position <= mapping.length()) {
             int letter = findIndex(toChange, translate[mappos]);
-            toChange = alphabet.charAt(letter);
+            char changed = alphabet.charAt(letter);
             // switch between caps/lowercase:
             if (!cap) {
-                return toChange;
+                return changed;
             } else {
-                return Character.toUpperCase(toChange);
+                return Character.toUpperCase(changed);
             }
         } else {
             return toChange;
@@ -114,7 +114,7 @@ class Vigenere extends Substitution {
         } else if (args[0].contains("decrypt")) {
             tr = new Vigenere(args[1].toLowerCase());
             for (int i = 0; i < args[2].length(); i++) {
-                done += tr.encrypt(args[2].charAt(i));
+                done += tr.decrypt(args[2].charAt(i));
             }
             System.out.println(done);
         } else {
