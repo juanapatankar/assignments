@@ -12,7 +12,7 @@ abstract class Substitution implements Cipher {
     public String decrypt(String cryptotext) {
         String decoded = "";
         for (int i = 0; i < cryptotext.length(); i++) {
-            decoded += encrypt(cryptotext.charAt(i));
+            decoded += decrypt(cryptotext.charAt(i));
         }
         return decoded;
     }

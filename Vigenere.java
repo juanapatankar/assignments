@@ -113,17 +113,11 @@ class Vigenere extends Substitution {
             System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Vigenere encrypt key \"cipher text\"");
         } else if (args[0].contains("decrypt")) {
             tr = new Vigenere(args[1]);
-            for (int i = 0; i < args[2].length(); i++) {
-                done += tr.decrypt(args[2].charAt(i));
-            }
-            System.out.println(done);
+            System.out.println(tr.decrypt(args[2]));
         } else {
             if (args[0].contains("encrypt")) {
                 tr = new Vigenere(args[1]);
-                for (int i = 0; i < args[2].length(); i++) {
-                    done += tr.encrypt(args[2].charAt(i));
-                }
-                System.out.println(done);
+                System.out.println(tr.encrypt(args[2]));
             }
         }
 
