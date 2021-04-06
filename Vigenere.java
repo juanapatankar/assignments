@@ -1,4 +1,4 @@
-class Vigenere extends Substitution {
+public class Vigenere extends Substitution {
     public char[][] translate;
     public int position = 0;
     public int mappos;
