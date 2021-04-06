@@ -1,6 +1,6 @@
-abstract class Substitution implements Cipher {
-    abstract char encrypt(char c);
-    abstract char decrypt(char c);
+public abstract class Substitution implements Cipher {
+    public abstract char encrypt(char c);
+    public abstract char decrypt(char c);
 
     public String encrypt(String plaintext) {
         String encoded = "";
