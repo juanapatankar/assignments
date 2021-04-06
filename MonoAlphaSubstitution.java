@@ -97,23 +97,16 @@ public class MonoAlphaSubstitution extends Substitution {
         }
 
         MonoAlphaSubstitution tr;
-        String done = "";   // Need to sort error messages
         if (args[0].contains("encrypt") && valid) {
             tr = new MonoAlphaSubstitution(args[1]);
-            for (int i = 0; i < args[2].length(); i++) {
-                done += tr.encrypt(args[2].charAt(i));
-            }
-            System.out.println(done);
+            System.out.println(tr.encrypt(args[2]));
         }
         if (args[0].contains("decrypt") && valid) {
             if (args.length == 2) {
                 System.out.println(args[1]);
             } else {
                 tr = new MonoAlphaSubstitution(args[1]);
-                for (int i = 0; i < args[2].length(); i++) {
-                    done += tr.decrypt(args[2].charAt(i));
-                }
-                System.out.println(done);
+                System.out.println(tr.decrypt(args[2]));
             }
         }
 
