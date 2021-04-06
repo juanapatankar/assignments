@@ -117,19 +117,6 @@ class Vigenere extends Substitution {
                 tr = new Vigenere(args[1]);
                 System.out.println(tr.encrypt(args[2]));
             }
-        }
-
-        
-        /* 
-        if (args.length == 1) {
-            tr = new Vigenere(args[0]);
-            for (int i = 0; i < args[0].length(); i++) {
-                done += tr.encrypt(args[0].charAt(i));
-            }
-            System.out.println(done);
-        } else if (args.length == 0) {
-            tr = new Vigenere();
-        } */
-        
+        }        
     }
 }

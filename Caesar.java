@@ -88,20 +88,12 @@ public class Caesar extends MonoAlphaSubstitution {
                 System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java Caesar encrypt n \"cipher text\"");
             }
             if (args[0].contains("encrypt") && valid) {
-                String done = "";
                 Caesar tr = new Caesar(Integer.parseInt(args[1]));
-                for (int i = 0; i < args[2].length(); i++) {
-                    done += tr.encrypt(args[2].charAt(i));
-                }
-                System.out.println(done);
+                System.out.println(tr.encrypt(args[2]));
             }
             if (args[0].contains("decrypt") && valid) {
                 Caesar tr = new Caesar(Integer.parseInt(args[1]));
-                String done = "";
-                for (int i = 0; i < args[2].length(); i++) {
-                    done += tr.decrypt(args[2].charAt(i));
-                }
-                System.out.println(done);
+                System.out.println(tr.decrypt(args[2]));
             }
         }
         
