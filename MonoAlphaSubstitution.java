@@ -1,9 +1,15 @@
 public class MonoAlphaSubstitution extends Substitution {
+    // Declares translate, an array containing characters
     public char[] translate;
+    // Declares an alphabet string, to test character
     static String alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    // Default constructor, assigns an unchanged translation table
     public MonoAlphaSubstitution() {
+        // Initialise translate
         translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     }
+    
     public MonoAlphaSubstitution(String mapping) {
         // Find alternate characters
         translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
