@@ -11,7 +11,7 @@ public class MonoAlphaSubstitution extends Substitution {
     */ 
     public MonoAlphaSubstitution() {
         // Initialise translate
-        translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        translate = new char[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     }
 
     /*** 
@@ -20,7 +20,7 @@ public class MonoAlphaSubstitution extends Substitution {
     */
     public MonoAlphaSubstitution(String mapping) {
         // Initialise the translation table to contain the alphabet
-        translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        translate = new char[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         // Change mapping's alternate letters (starting from the first one) to the one before it 
         for (int i = 1; i < mapping.length(); i+=2) {
             char encoded = mapping.charAt(i);
@@ -86,7 +86,7 @@ public class MonoAlphaSubstitution extends Substitution {
     * @param toChange a character to be encrypted
     * @return the encrypted character
     */
-    public char encrypt (char toChange) {
+    public char encrypt(char toChange) {
         int letter;
         Boolean cap = false;
         String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

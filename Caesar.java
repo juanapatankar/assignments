@@ -11,7 +11,7 @@ public class Caesar extends MonoAlphaSubstitution {
     * Default constructor, intialises translate as a translation table containing the unchanged alphabet
     */
     public Caesar() {
-        translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        translate = new char[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     }
 
     /***
@@ -19,7 +19,7 @@ public class Caesar extends MonoAlphaSubstitution {
     * @param shift the number of letters to shift by 
     */
     public Caesar(int shift) {
-        translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        translate = new char[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         String encoder = "abcdefghijklmnopqrstuvwxyz";
         for (int i = 0; i < translate.length; i++) {
             if (shift < 0) {
