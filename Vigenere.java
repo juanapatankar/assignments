@@ -1,16 +1,20 @@
 public class Vigenere extends Substitution {
     public char[][] translate;
     public int position = 0;
-    public int mappos;
+    private int mappos;
     public String mapping;
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    /***
+     * Default constructor, sets the translation table to contain the unchanged alphabet
+     */
     public Vigenere() {
         mapping = "";
         translate = new char[][] {{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}};
     }
     /***
-     * 
-     * @param map
+     * Iterates through mapping to change letters in the unchanged translation table to their encrypted counterparts
+     * @param map the mapping to modify the translation table with
      */
     public Vigenere(String map) {
         this.mapping = map.toLowerCase();
