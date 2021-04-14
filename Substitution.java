@@ -1,9 +1,4 @@
 public abstract class Substitution implements Cipher {
-    /**
-    * 
-    * @param c to test each character 
-    * @return char c that's the encrypted character if appropriate
-    */
     // Declare abstract methods, don't need implementation
     /***
     * To be implemented in the subclass, as this will vary for each type of encryption 
@@ -19,7 +14,8 @@ public abstract class Substitution implements Cipher {
     */
     public abstract char decrypt(char c);
 
-    /*** Takes a string, and encrypts it by calling encrypt(char c) on each character
+    /*** 
+    * Takes a string, and encrypts it by calling encrypt(char c) on each character
     * @param plaintext to encode
     * @return the encrypted string
     */
@@ -35,7 +31,8 @@ public abstract class Substitution implements Cipher {
         return encoded;
     }
 
-    /*** Takes a string, and decrypts it by calling decrypt(char c) on each character
+    /*** 
+    * Takes a string, and decrypts it by calling decrypt(char c) on each character
     * @param cryptotext to decode
     * @return the plaintext string
     */
