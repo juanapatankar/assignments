@@ -1,7 +1,7 @@
 public abstract class Substitution implements Cipher {
     /**
      * 
-     * @param char c to test each character 
+     * @param c to test each character 
      * @return char c that's the encrypted character if appropriate
      */
     // Declare abstract methods, don't need implementation
