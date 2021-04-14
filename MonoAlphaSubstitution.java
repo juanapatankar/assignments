@@ -1,10 +1,15 @@
 public class MonoAlphaSubstitution extends Substitution {
     // Declares translate, an array containing characters
+    /***
+     * Declares an empty translation table
+     */
     public char[] translate;
     // Declares an alphabet string, to test character
     static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-    // Default constructor, assigns an unchanged translation table
+    /***
+     * Default constructor, assigns an unchanged translation table (the alphabet)
+     */ 
     public MonoAlphaSubstitution() {
         // Initialise translate
         translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
@@ -27,7 +32,7 @@ public class MonoAlphaSubstitution extends Substitution {
     /***
      * Helper method converts a letter in the alphabet to its index. E.g. 'c' is the third letter of the alphabet, so its index is 2.
      * @param toFind the character whose index position in the alphabet needs to be identified
-     * @return pos, the index position of the character (assuming it is a letter)
+     * @return the index position of the character (assuming it is a letter)
      */
     public static int letterToNumber(char toFind) {
         int pos = 0;
@@ -57,7 +62,7 @@ public class MonoAlphaSubstitution extends Substitution {
     /***
      * Test if the current character in the input string is a letter (which may be encrypted/decrypted) or is a number/punctuation/' '.
      * @param test the character to be tested
-     * @return true if and only if the character is a letter
+     * @return true if and only if the character is a letter. Otherwise, return false
      */
     public static Boolean isLetter(char test) {
         for (int i = 0; i < alphabet.length(); i++) {
@@ -120,7 +125,7 @@ public class MonoAlphaSubstitution extends Substitution {
     }
 
     /***
-     * Sets the validNum flag to false initially. Check how many arguments have been passed. If there aren't enough, print that there are insufficient arguments and prompt the user for correct usage. Similarly, if there are too many, print there are too many arguments to the console. If there are 3 arguments, set validNum to true. Then, see if the first argument is 'encrypt' or 'decrypt'. If it is neither, then output an error message and again prompt for the correct usage. If it is, then encrypt/decrypt the third argument string by using the second argument as a mapping string.
+     * Initialise the validNum flag as false. Check how many arguments have been passed. If there are less than 3, print that there are insufficient arguments and prompt the user for correct usage. Similarly, if there are too many, print an error stating that there are too many arguments to the console. If there are 3 arguments, set validNum to true. Then, see if the first argument is 'encrypt' or 'decrypt'. If it is neither, then output an error message and again prompt for the correct usage. If it is, then encrypt/decrypt the third argument string by using the second argument as a mapping string.
      * @param args the list of command line arguments that have been passed
      */
     public static void main(String[] args) {

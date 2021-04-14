@@ -8,6 +8,10 @@ public class Vigenere extends Substitution {
         mapping = "";
         translate = new char[][] {{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}};
     }
+    /***
+     * 
+     * @param map
+     */
     public Vigenere(String map) {
         this.mapping = map.toLowerCase();
         translate = new char[mapping.length()][26];
