@@ -73,9 +73,19 @@ int main(void) {
 		je inczero
 
 	outornew:
+<<<<<<< HEAD
 		cmp ebx, 0					; tests if more numbers to input
 		jz output					; output counts if no more numbers
 		jmp newnumber				; get the next input (loop)
+=======
+		cmp ebx, 0
+		jz output
+		jmp newnumber
+	
+	
+	//gleepeeeeeeeeeeeeeeeeeey
+
+>>>>>>> 8ef485ff48d90faacca31a9300a7563283e00120
 	
 	output: 
 		mov eax, [zerocount]
