@@ -1,9 +1,21 @@
 public class Vigenere extends Substitution {
+    /***
+    * Declare an empty list of translation tables, with undefined lengths (as length of mapping is not known)
+    */
     public char[][] translate;
+    /***
+    * Intialise the position of the character (through the string to tnecrypt/decrypt) as 0
+    */
     public int position = 0;
-    private int mappos;
+    /***
+    * Declare a mapping variable: will remain blank if none is given, to avoid errors
+    */
     public String mapping;
+    /***
+    * Create a string containing the unchanged alphabet
+    */
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private int mappos;
 
     /***
     * Default constructor, sets the translation table to contain the unchanged alphabet
