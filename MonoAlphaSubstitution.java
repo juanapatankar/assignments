@@ -19,12 +19,14 @@ public class MonoAlphaSubstitution extends Substitution {
      * @param mapping the string depicting what each alternate character should be changed to (the character after)
      */
     public MonoAlphaSubstitution(String mapping) {
-        // Find alternate characters
+        // Initialise the translation table to contain the alphabet
         translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        // Change mapping's alternate letters (starting from the first one) to the one before it 
         for (int i = 1; i < mapping.length(); i+=2) {
             char encoded = mapping.charAt(i);
             char decoded = mapping.charAt(i-1);
-           translate[letterToNumber(decoded)] = encoded; 
+            // Change the letters in the translation table to their encoded counterpart
+            translate[letterToNumber(decoded)] = encoded; 
         }
         
     }
@@ -35,12 +37,15 @@ public class MonoAlphaSubstitution extends Substitution {
      * @return the index position of the character (assuming it is a letter)
      */
     public static int letterToNumber(char toFind) {
+        // Declare and intialise a pos variable to 0 (start)
         int pos = 0;
+        // Search the alphabet for the letter stored in toFind
         for (int i = 0; i < alphabet.length(); i++) {
             if (alphabet.charAt(i) == toFind) {
                 pos = i;
             }
         }
+        // Return the index position of the letter. E.g. letterToNumber('d') returns 3
         return pos;
     }
 
@@ -51,11 +56,13 @@ public class MonoAlphaSubstitution extends Substitution {
      * @return the position of the target character in mapping
      */
     public static int findIndex(char toFind, char[] mapping) {
+        // Search mapping for the letter toFind to see if it needs to be changed
         for (int i = 0; i < mapping.length; i++) {
             if (mapping[i] == toFind) {
                 return i;
             }
         }
+        // Return -1 if the letter is not in mapping
         return -1;
     }
 
@@ -65,11 +72,13 @@ public class MonoAlphaSubstitution extends Substitution {
      * @return true if and only if the character is a letter. Otherwise, return false
      */
     public static Boolean isLetter(char test) {
+        // Iterate through the alphabet, return true if found test
         for (int i = 0; i < alphabet.length(); i++) {
             if (alphabet.charAt(i) == test) {
                 return true;
             }
         }
+        // Return false if test is not a letter
         return false;
     }
 
@@ -82,17 +91,23 @@ public class MonoAlphaSubstitution extends Substitution {
         int letter;
         Boolean cap = false;
         String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        // Search caps to see if toChange is a capital letter
         if (caps.contains(Character.toString(toChange))) {
+            // Set cap flag to true. Convert toChange to lowercase
             cap = true;
             toChange = Character.toLowerCase(toChange);
         }
+        // Identify the position of toChange in the alphabet
         letter = letterToNumber(toChange);
+        // Return unchanged character if toChange isn't a letter
         if (!isLetter(toChange)) {
             return toChange;
         } else {
+            // Match toChange to its corresponding letter in the translation table (in the same position)
             if (!cap) {
                 return translate[letter];
             } else {
+                // Convert back to uppercase if original toChange was a capital letter
                 return Character.toUpperCase(translate[letter]);
             }
             
@@ -108,15 +123,19 @@ public class MonoAlphaSubstitution extends Substitution {
         Boolean cap = false;
         String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         char letter = 'a';
+        // Set cap flag to true if toChange is a capital letter. Convert toChange to lowercase
         if (caps.contains(Character.toString(toChange))) {
             cap = true;
             toChange = Character.toLowerCase(toChange);
         }
+        // Return the unchanged character if toChange isn't a letter
         if (!isLetter(toChange)) {
             return toChange;
         } else {
-            letter = caps.charAt(findIndex(Character.toLowerCase(toChange), translate));
+            // Find the index of toChange in the translation table, then use caps to find the decoded letter at the same position
+            letter = caps.charAt(findIndex(toChange, translate));
         }
+        // Convert letter to lowercase if original toChange was lowercase
         if (!cap) {
             return Character.toLowerCase(letter);
         } else {
@@ -130,32 +149,37 @@ public class MonoAlphaSubstitution extends Substitution {
      */
     public static void main(String[] args) {
         Boolean validNum = false;
+        // Test if correct number of arguments were passed at the command line. Print an error message if not 3
         if (args.length < 3) {
             System.out.println("Too few parameters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
         } else if (args.length > 3) {
             System.out.println("Too many parameters!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
         } else {
+            // Set validNum flag to true if exactly 3 arguments passed
             validNum = true;
         }
 
+        // Print an error message if the first argument is not encrypt/decrypt
         if (!(args[0].contains("encrypt") || args[0].contains("decrypt"))) {
             System.out.println("The first parameter must be \"encrypt\" or \"decrypt\"!\nUsage: java MonoAlphaSubstitution encrypt key \"cipher text\"");
         }
 
         MonoAlphaSubstitution tr;
+        // Encrypt the third argument, using the second argument as mapping to create the translation table
         if (args[0].contains("encrypt") && validNum) {
             tr = new MonoAlphaSubstitution(args[1]);
             System.out.println(tr.encrypt(args[2]));
         }
+        // If no mapping is given, print the given string
         if (args[0].contains("decrypt") && validNum) {
             if (args.length == 2) {
                 System.out.println(args[1]);
             } else {
+                // Create the translation table using the second argument as mapping
                 tr = new MonoAlphaSubstitution(args[1]);
+                // Print the decrypted message
                 System.out.println(tr.decrypt(args[2]));
             }
-        }
-
-        
+        }     
     }
 }
