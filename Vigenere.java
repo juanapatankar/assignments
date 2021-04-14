@@ -3,18 +3,23 @@ public class Vigenere extends Substitution {
     * Declare an empty list of translation tables, with undefined lengths (as length of mapping is not known)
     */
     public char[][] translate;
+
     /***
     * Intialise the position of the character (through the string to tnecrypt/decrypt) as 0
     */
     public int position = 0;
+
     /***
     * Declare a mapping variable: will remain blank if none is given, to avoid errors
     */
     public String mapping;
+
     /***
     * Create a string containing the unchanged alphabet
     */
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    // Declare a counter variable for the position of the next mapping character
     private int mappos;
 
     /***
@@ -24,20 +29,25 @@ public class Vigenere extends Substitution {
         mapping = "";
         translate = new char[][] {{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}};
     }
+
     /***
-    * Iterates through mapping to change letters in the unchanged translation table to their encrypted counterparts
-    * @param map the mapping to modify the translation table with
+    * Iterates through mapping to change letters in the unchanged translation table to their encrypted counterparts. First changes mapping to a lowercase string, so that each character can be compared with 'a'. E.g. 'g' is the 7th letter, 'a' is the 1st, so the shift for that character in the string to be changed will be 6. If the current mapping character is 'a', the letter will not be changed during the en/decryption. Next, the list of translation tables is initialised to specific size: it will contain one array for each letter in mapping, and each of the inner arrays will contain one element for each of the 26 letters in the alphabet. Then calculate the shift, using modulus for shifts larger than 26. Finally, set each element in each translation table to be the changed letter. E.g if the the first letter in the mapping was 'd', this implies a shift of 3. The first translation table will contain the new alphabet, 'a' is now 'd', 'b' is 'e', 'c' is 'f', etc. 
+    * @param map the mapping to modify the translation table
     */
     public Vigenere(String map) {
+        // Converts mapping to lowercase
         this.mapping = map.toLowerCase();
+        // Initialises list of translation tables
         translate = new char[mapping.length()][26];
         for (int i = 0; i < mapping.length(); i++) {
+            // Calculate the shift
             int shift = letterToNumber(mapping.charAt(i));
             for (int j = 0; j < 26; j++) {
                 int newletter = j + shift;
                 if (newletter >= 26) {
                     newletter -= 26;
                 }
+                // Set newchar to be the shifted letter
                 char newchar = alphabet.charAt(newletter);
                 translate[i][j] = newchar;
             }
@@ -52,11 +62,13 @@ public class Vigenere extends Substitution {
     */
     public static int letterToNumber(char toFind) {
         int pos = 0;
+        // Search through the alphabet
         for (int i = 0; i < alphabet.length(); i++) {
             if (alphabet.charAt(i) == toFind) {
                 pos = i;
             }
         }
+        // Return the index position of toFind in the alphabet
         return pos;
     }
 
@@ -66,6 +78,7 @@ public class Vigenere extends Substitution {
     * @return true if test is a letter. Otherwise, returns false
     */
     public static Boolean isLetter(char test) {
+        // Search through the alphabet for target
         for (int i = 0; i < alphabet.length(); i++) {
             if (alphabet.charAt(i) == test) {
                 return true;
@@ -93,6 +106,7 @@ public class Vigenere extends Substitution {
             cap = true;
             toChange = Character.toLowerCase(toChange);
         }
+        // Increment position, so that the enxt translation table will be used
         position++;
         if (isLetter(toChange) && position <= mapping.length()) {
             int letter = letterToNumber(toChange);
