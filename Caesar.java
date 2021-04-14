@@ -4,7 +4,7 @@ public class Caesar extends MonoAlphaSubstitution {
     */
     public char[] translate;
     /***
-    * Delare a string containing the actual alphabet
+    * Declare a string containing the actual alphabet
     */
     static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     /***
@@ -15,9 +15,9 @@ public class Caesar extends MonoAlphaSubstitution {
     }
 
     /***
-     * Initialises the translation table as the alphabet, then calculates the number of letters to shift forwards/backwards by depending on the given number. Uses the string encoder to select the target letter for each element in the translation table, which is then updated.
-     * @param shift the number of letters to shift by 
-     */
+    * Initialises the translation table as the alphabet, then calculates the number of letters to shift forwards/backwards by depending on the given number. Uses the string encoder to select the target letter for each element in the translation table, which is then updated.
+    * @param shift the number of letters to shift by 
+    */
     public Caesar(int shift) {
         translate = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         String encoder = "abcdefghijklmnopqrstuvwxyz";
@@ -32,7 +32,7 @@ public class Caesar extends MonoAlphaSubstitution {
     /***
     * Uses the alphabet string to test if the passed character is or is not a letter. Returns true or false depending on the result.
     * @param test the character to test
-    * @return true if test is a letter. Otherwise, false
+    * @return true if test is a letter. Otherwise,  return false
     */
     public static Boolean isLetter(char test) {
         for (int i = 0; i < alphabet.length(); i++) {
@@ -72,7 +72,7 @@ public class Caesar extends MonoAlphaSubstitution {
     }
 
     /***
-    * Returns the index position of a value (in this case a letter) in the translation table. If it isn't in the table, then return -1 (as int expected).
+    * Returns the index position of a value (in this case a letter) in the translation table. If it isn't in the table, then return -1 as integer output expected.
     * @param toFind
     * @param mapping
     * @return the index position of the character in the translation table. If it is not present, return -1. 
@@ -116,7 +116,7 @@ public class Caesar extends MonoAlphaSubstitution {
     }
 
     /***
-    * First test if the correct number of arguments was passed, and output the correct error message if less or more than 3 arguments were passed. If test 1 is succesful, then check if the first argument is 'encrypt'/'decrypt' and output an error message if test fails. Assuming both tests are passed, initialise the translation table by passing the second argument as the number of positions to shift each letter by. Finally, encrypts/decrypts the third argument as requested. 
+    * First test if the correct number of arguments was passed, and output the correct error message if less or more than 3 arguments were passed. If test 1 is successful, then check if the first argument is 'encrypt'/'decrypt' and output an error message if test fails. Assuming both tests are passed, initialise the translation table by passing the second argument as the number of positions to shift each letter by. Finally, encrypts/decrypts the third argument as requested. 
     * @param args an array containing the strings passed at the command line
     */
     public static void main(String[] args) {
