@@ -1,8 +1,8 @@
 //
 // by Prudence Wong 2021-03-20
 //
-// Name:
-// Student ID:
+// Name: Juana Patankar
+// Student ID: 201471422
 //
 
 class COMP108W07 {
