@@ -1,8 +1,10 @@
+import java.awt.HeadlessException;
+
 //
 // Note: You are allowed to add additional methods if you need.
 // Coded by Prudence Wong 2021-03-06
 //
-// Name: Juana Patanka
+// Name: Juana Patankar
 // Student ID: 201471422
 // MWS username: sgjpatan
 //
@@ -31,6 +33,25 @@ class COMP108A2Cab {
 	// append to end of list when miss
 	public COMP108A2Output appendIfMiss(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
+		COMP108A2Node curr = head;
+		for (int i = 0; i < rSize; i++) {
+			Boolean found = false;
+			while (curr != null && !found) {
+				if (curr.data == rArray[i]) {
+					output.hitCount++;
+					found = true;
+				}
+				curr = curr.next;
+				output.compare[i]++;
+			}
+			curr = head;
+			if (!found) {
+				output.missCount++;
+				COMP108A2Node newNode = new COMP108A2Node(rArray[i]);
+				insertTail(newNode);
+			}
+		}
+
 
 		output.cabFromHead = headToTail();
 		output.cabFromTail = tailToHead();
