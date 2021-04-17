@@ -33,6 +33,7 @@ class COMP108A2Cab {
 	// append to end of list when miss
 	public COMP108A2Output appendIfMiss(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
+		// Initialise the linked list cursor to point to the head
 		COMP108A2Node curr = head;
 		for (int i = 0; i < rSize; i++) {
 			Boolean found = false;
@@ -56,10 +57,73 @@ class COMP108A2Cab {
 		return output;
 	}
 
+	public void searchMoveToHead(int key) {
+		COMP108A2Node curr = head;
+		Boolean found = false;
+		while (curr != null && found == false) {
+			if (curr.data == key) {
+				 if (curr.next != null) {
+					if (head != curr) {
+						curr.next.prev = curr.prev;
+						curr.prev.next = curr.next;
+						curr.prev = null;
+						curr.next = null;
+						this.insertHead(curr);
+					}
+					found = true;
+				} else {
+					tail = curr.prev;
+					curr.prev.next = null;
+					curr.prev = null;
+					this.insertHead(curr);
+					found = true;
+				}
+			}
+			curr = curr.next;
+		}
+		if (!found) {
+			System.out.println("Did not find " + key + " in the list.");
+		}
+	}
+
 	// move the file requested to the beginning of the list
 	public COMP108A2Output moveToFront(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
-
+		COMP108A2Node curr = head;
+		for (int i = 0; i < rSize; i++) {
+			Boolean found = false;
+			while (curr != null && !found) {
+				if (curr.data == rArray[i]) {
+					if (curr.next != null) {
+						if (head != curr) {
+							curr.next.prev = curr.prev;
+							curr.prev.next = curr.next;
+							curr.next = null;
+							curr.prev = null;
+							this.insertHead(curr);
+						}
+						found = true;
+					} else {
+						tail = curr.prev;
+						curr.prev.next = null;
+						curr.prev = null;
+						this.insertHead(curr);
+						found = true;
+					}
+					
+				}
+				curr = curr.next;
+				output.compare[i]++;
+			}
+			curr = head;
+			if (found) {
+				output.hitCount++;
+			} else {
+				output.missCount++;
+				COMP108A2Node newNode = new COMP108A2Node(rArray[i]);
+				this.insertHead(newNode);
+			}
+		}
 		output.cabFromHead = headToTail();
 		output.cabFromTail = tailToHead();
 		return output;	
