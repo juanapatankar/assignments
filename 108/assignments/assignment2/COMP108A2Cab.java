@@ -51,8 +51,6 @@ class COMP108A2Cab {
 				insertTail(newNode);
 			}
 		}
-
-
 		output.cabFromHead = headToTail();
 		output.cabFromTail = tailToHead();
 		return output;
