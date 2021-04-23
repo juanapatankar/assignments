@@ -14,9 +14,9 @@ import java.awt.HeadlessException;
 // k distinct requests in the request sequence.
 // Justify your answer.
 //
-// notExists:
+// notExists: Searches iteratively through 2 unsorted lists. Therefore O(rn) worst case
 //
-// count: 
+// count: O(nr) as each movie ID is searched for in the list of length r.   
 //
 
 class COMP108W08 {
@@ -35,7 +35,7 @@ class COMP108W08 {
 		for (int i = 0; i < size; i++) {
 			Boolean found = false;
 			Node curr = head;
-			while (curr != null) {
+			while (curr != null && !found) {
 				if (curr.data == array[i]) {
 					found = true;
 				}
@@ -50,6 +50,30 @@ class COMP108W08 {
 	// Input: array[] with size entries 
 	// for each entry in the list, count how many times it appears in array[]
 	public void count(int array[], int size) {
+		Node curr = head;
+		while (curr != null) {
+			int count = 0;
+			for (int i = 0; i < size; i++) {
+				if (array[i] == curr.data) {
+					count++;
+				}
+			}
+			switch(count) {
+				case 0:
+					System.out.println(curr.data + " has not been requested.");
+					break;
+				case 1:
+					System.out.println(curr.data + " has been requested once.");
+					break;
+				case 2:
+					System.out.println(curr.data + " has been requested twice.");
+					break;
+				default:
+					System.out.println(curr.data + " has been requested " + count + " time(s).");
+			}
+			curr = curr.next;
+
+		}
 
 	}
 
