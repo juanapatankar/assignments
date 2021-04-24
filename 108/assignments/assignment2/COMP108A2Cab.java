@@ -57,40 +57,12 @@ class COMP108A2Cab {
 		return output;
 	}
 
-	public void searchMoveToHead(int key) {
-		COMP108A2Node curr = head;
-		Boolean found = false;
-		while (curr != null && found == false) {
-			if (curr.data == key) {
-				 if (curr.next != null) {
-					if (head != curr) {
-						curr.next.prev = curr.prev;
-						curr.prev.next = curr.next;
-						curr.prev = null;
-						curr.next = null;
-						this.insertHead(curr);
-					}
-					found = true;
-				} else {
-					tail = curr.prev;
-					curr.prev.next = null;
-					curr.prev = null;
-					this.insertHead(curr);
-					found = true;
-				}
-			}
-			curr = curr.next;
-		}
-		if (!found) {
-			System.out.println("Did not find " + key + " in the list.");
-		}
-	}
-
 	// move the file requested to the beginning of the list
 	public COMP108A2Output moveToFront(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
-		COMP108A2Node curr = head;
+		
 		for (int i = 0; i < rSize; i++) {
+			COMP108A2Node curr = head;
 			Boolean found = false;
 			while (curr != null && !found) {
 				if (curr.data == rArray[i]) {
@@ -133,12 +105,96 @@ class COMP108A2Cab {
 	public COMP108A2Output freqCount(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
 		
+		for (int i = 0; i < rSize; i++) {
+			COMP108A2Node curr = head;
+			COMP108A2Node newNode = new COMP108A2Node(rArray[i]);
+			Boolean found = false;
+			while (curr != null && !found) {
+				output.compare[i]++;
+				if (curr.data == rArray[i]) {
+					found = true;
+					output.hitCount++;
+					curr.freq++;
+					newNode.freq = curr.freq;
+					if (curr == head) {
+						head = head.next;
+						if (head != null) {
+							head.prev = null;
+						}
+					}  /* else if (curr.next != null) {
+						curr.next.prev = curr.prev;
+						curr.prev.next = curr.next;
+						curr.next = null;
+						curr.prev = null;
+					} */
+				}
+				curr = curr.next;
+			}
+			if (!found) {
+				output.missCount++;
+				this.insertTail(newNode);
+				newNode.freq = 1;
+			} else {
+				curr = head;
+				while (curr != null) {
+					if (head.freq < newNode.freq) {
+						this.insertHead(newNode);
+					} else if (curr.freq > newNode.freq && curr.next.freq < newNode.freq) {
+						curr.next.prev = newNode;
+						newNode.next = curr.next;
+						curr.next = newNode;
+						newNode.prev = curr;
+					} 
+					curr = curr.next;
+				}
+			}
+		}
+
+
 		output.cabFromHead = headToTail();
 		output.cabFromTail = tailToHead();
 		output.cabFromHeadFreq = headToTailFreq();
 		return output;		
 	}
 
+/* 	// Delete existing node
+	while (curr != null) {
+		if (curr.data == rArray[i] && head != curr) {
+			if (curr.next != null) {
+				if (head != curr) {
+					curr.next.prev = curr.prev;
+					curr.prev.next = curr.next;
+					curr.next = null;
+					curr.prev = null;
+				} else {
+					head = curr.next;
+					curr.next.prev = head;
+					curr.next = null;
+					curr.prev = null;
+				}
+			} else {
+				tail = curr.prev;
+				curr.prev.next = null;
+				curr.prev = null;
+				
+			}
+			
+		} else {
+			curr = curr.next;
+		}
+		
+	}
+	// Insert into new position
+	curr = head;
+	while (curr != null) {
+		if (curr.freq > newNode.freq && curr.next.freq < newNode.freq) {
+			newNode.next = curr.next;
+			newNode.prev = curr;
+			curr.next.prev = newNode;
+			curr.next = newNode;
+		}
+		curr = curr.next;
+	} */
 	// DO NOT change this method
 	// insert newNode to head of list
 	public void insertHead(COMP108A2Node newNode) {		
