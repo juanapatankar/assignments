@@ -116,17 +116,7 @@ class COMP108A2Cab {
 					output.hitCount++;
 					curr.freq++;
 					newNode.freq = curr.freq;
-					if (curr == head) {
-						head = head.next;
-						if (head != null) {
-							head.prev = null;
-						}
-					}  /* else if (curr.next != null) {
-						curr.next.prev = curr.prev;
-						curr.prev.next = curr.next;
-						curr.next = null;
-						curr.prev = null;
-					} */
+					//// HERRREEEEEEEE!!!! here
 				}
 				curr = curr.next;
 			}
@@ -134,19 +124,6 @@ class COMP108A2Cab {
 				output.missCount++;
 				this.insertTail(newNode);
 				newNode.freq = 1;
-			} else {
-				curr = head;
-				while (curr != null) {
-					if (head.freq < newNode.freq) {
-						this.insertHead(newNode);
-					} else if (curr.freq > newNode.freq && curr.next.freq < newNode.freq) {
-						curr.next.prev = newNode;
-						newNode.next = curr.next;
-						curr.next = newNode;
-						newNode.prev = curr;
-					} 
-					curr = curr.next;
-				}
 			}
 		}
 
