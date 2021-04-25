@@ -100,6 +100,27 @@ class COMP108A2Cab {
 		output.cabFromTail = tailToHead();
 		return output;	
 	}
+
+	public void deleteNode(COMP108A2Node targetNode) {
+		COMP108A2Node curr = head;
+		while (curr != null) {
+			if (curr.data == targetNode.data) {
+				if (curr == head) {
+					this.deleteHead();
+				} else if (curr == tail) {
+					tail = tail.prev;
+					tail.next = null;
+					curr.prev = null;
+				} else {
+					curr.next.prev = curr.prev;
+					curr.prev.next = curr.next;
+					curr.next = null;
+					curr.prev = null;
+				}
+			}
+			curr = curr.next;
+		}
+	}
 	
 	// move the file requested so that order is by non-increasing frequency
 	public COMP108A2Output freqCount(int rArray[], int rSize) {
@@ -138,8 +159,10 @@ class COMP108A2Cab {
 				curr = head;
 				while (curr != null) {
 					if (head.freq < newNode.freq) {
+						this.deleteNode(newNode);
 						this.insertHead(newNode);
 					} else if (curr.freq > newNode.freq && curr.next.freq < newNode.freq) {
+						this.deleteNode(newNode);
 						curr.next.prev = newNode;
 						newNode.next = curr.next;
 						curr.next = newNode;
