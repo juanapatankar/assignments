@@ -117,6 +117,17 @@ class COMP108A2Cab {
 					curr.freq++;
 					newNode.freq = curr.freq;
 					//// HERRREEEEEEEE!!!! here
+					if (curr == head) {
+						head = head.next;
+						if (head != null) {
+							head.prev = null;
+						curr.next = null;
+						}
+					} else if (curr == tail) {
+						tail = tail.prev;
+						tail.next = null;
+						curr.prev = null;
+					} 
 				}
 				curr = curr.next;
 			}
