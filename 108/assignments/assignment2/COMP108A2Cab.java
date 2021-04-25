@@ -105,51 +105,7 @@ class COMP108A2Cab {
 	public COMP108A2Output freqCount(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
 		
-		for (int i = 0; i < rSize; i++) {
-			COMP108A2Node curr = head;
-			COMP108A2Node newNode = new COMP108A2Node(rArray[i]);
-			Boolean found = false;
-			while (curr != null && !found) {
-				output.compare[i]++;
-				if (curr.data == rArray[i]) {
-					found = true;
-					output.hitCount++;
-					curr.freq++;
-					newNode.freq = curr.freq;
-					if (curr == head) {
-						head = head.next;
-						if (head != null) {
-							head.prev = null;
-						}
-					}  /* else if (curr.next != null) {
-						curr.next.prev = curr.prev;
-						curr.prev.next = curr.next;
-						curr.next = null;
-						curr.prev = null;
-					} */
-				}
-				curr = curr.next;
-			}
-			if (!found) {
-				output.missCount++;
-				this.insertTail(newNode);
-				newNode.freq = 1;
-			} else {
-				curr = head;
-				while (curr != null) {
-					if (head.freq < newNode.freq) {
-						this.insertHead(newNode);
-					} else if (curr.freq > newNode.freq && curr.next.freq < newNode.freq) {
-						curr.next.prev = newNode;
-						newNode.next = curr.next;
-						curr.next = newNode;
-						newNode.prev = curr;
-					} 
-					curr = curr.next;
-				}
-			}
-		}
-
+		
 
 		output.cabFromHead = headToTail();
 		output.cabFromTail = tailToHead();
