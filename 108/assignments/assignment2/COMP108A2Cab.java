@@ -100,11 +100,68 @@ class COMP108A2Cab {
 		output.cabFromTail = tailToHead();
 		return output;	
 	}
-	
+	public void insertNode(COMP108A2Node newNode) {
+		COMP108A2Node curr = head;
+		while (curr != null) {
+			if (curr == head && curr.freq < newNode.freq) {
+				this.insertHead(newNode);
+			} else if (curr == tail && curr.freq > newNode.freq) {
+				this.insertTail(newNode);
+			} else if (curr.freq > newNode.freq && curr.next.freq != curr.freq && curr.next.freq < newNode.freq) {
+				newNode.next = curr.next;
+				newNode.prev = curr;
+				curr.next.prev = newNode;
+				curr.next = newNode;
+			} else if (curr != head && curr != tail && curr.freq == curr.next.freq) {
+				curr = curr.next;
+				if (curr.freq > curr.next.freq) {
+					newNode.next = curr.next;
+					newNode.prev = curr;
+					curr.next.prev = newNode;
+					curr.next = newNode;
+				} else {
+					curr = curr.next;
+				}
+			
+			}
+			curr = curr.next;
+		}
+	}
 	// move the file requested so that order is by non-increasing frequency
 	public COMP108A2Output freqCount(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
-		
+		for (int i = 0; i < rSize; i++) {
+			COMP108A2Node curr = head;
+			Boolean found = false;
+			while (curr != null && !found) {
+				if (curr.data == rArray[i]) {
+					curr.freq++;
+					COMP108A2Node newNode = curr;
+					if (curr.next != null) {
+						if (head != curr) {
+							curr.next.prev = curr.prev;
+							curr.prev.next = curr.next;
+							curr.next = null;
+							curr.prev = null;
+							this.insertNode(newNode);
+						}
+						found = true;
+					} else {
+						tail = curr.prev;
+						curr.prev.next = null;
+						curr.prev = null;
+						this.insertNode(newNode);
+						found = true;
+					}
+				}
+				curr = curr.next;
+			}
+			if (found) {
+				output.hitCount++;
+			} else {
+				output.missCount++;
+			}
+		}
 		
 
 		output.cabFromHead = headToTail();
