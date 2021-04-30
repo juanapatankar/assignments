@@ -1,5 +1,7 @@
 import java.awt.HeadlessException;
 
+import com.sun.org.apache.xalan.internal.xsltc.dom.CurrentNodeListFilter;
+
 //
 // Note: You are allowed to add additional methods if you need.
 // Coded by Prudence Wong 2021-03-06
@@ -122,6 +124,18 @@ class COMP108A2Cab {
 		}
 	}
 	
+	public COMP108A2Node endOfSublist(COMP108A2Node first) {
+		COMP108A2Node place = first;
+		Boolean equal = true;
+		while (place != null && equal) {
+			if (place.next.freq == place.freq) {
+				place = place.next;
+			} else {
+				equal = false;
+			}
+		}
+		return place;
+	}
 	// move the file requested so that order is by non-increasing frequency
 	public COMP108A2Output freqCount(int rArray[], int rSize) {
 		COMP108A2Output output = new COMP108A2Output(rSize);
@@ -137,18 +151,9 @@ class COMP108A2Cab {
 					output.hitCount++;
 					curr.freq++;
 					newNode.freq = curr.freq;
-					if (curr == head) {
-						head = head.next;
-						if (head != null) {
-							head.prev = null;
-						}
-					}  /* else if (curr.next != null) {
-						curr.next.prev = curr.prev;
-						curr.prev.next = curr.next;
-						curr.next = null;
-						curr.prev = null;
-					} */
-				}
+				} else {
+					found = false;
+				} 
 				curr = curr.next;
 			}
 			if (!found) {
@@ -156,19 +161,48 @@ class COMP108A2Cab {
 				this.insertTail(newNode);
 				newNode.freq = 1;
 			} else {
-				curr = head;
-				while (curr != null) {
-					if (head.freq < newNode.freq) {
-						this.deleteNode(newNode);
-						this.insertHead(newNode);
-					} else if (curr.freq > newNode.freq && curr.next.freq < newNode.freq) {
-						this.deleteNode(newNode);
-						curr.next.prev = newNode;
+				if (head.freq < newNode.freq) {
+					this.deleteNode(newNode);
+					this.insertHead(newNode);
+				} else if (tail.freq > newNode.freq) {
+					this.deleteNode(newNode);
+					this.insertTail(newNode);
+				} else if (newNode.freq < head.freq && newNode.freq > tail.freq) {
+					curr = head;
+					Boolean foundpos = false;
+					while (curr.next != null && !foundpos) {
+						if (curr.freq < newNode.freq) {
+							curr = curr.next;
+						} else if (curr.freq == newNode.freq) {
+							curr = endOfSublist(curr);
+							foundpos = true;
+						}
+					}
+					this.deleteNode(newNode);
+					newNode.next = curr.next;
+					newNode.prev = curr;
+					curr.next.prev = newNode;
+					curr.next = newNode;
+				} else if (tail.freq == newNode.freq && tail.data != newNode.data) {
+					this.deleteNode(newNode);
+					newNode.next = null;
+					newNode.prev = tail;
+					tail.next = newNode;
+				} else if (head.freq == newNode.freq && head.data != newNode.data) {
+					this.deleteNode(newNode);
+					curr = head;
+					curr = this.endOfSublist(curr);
+					if (curr == head) {
+						newNode.next = head;
+						newNode.prev = null;
+						head.prev = newNode;
+						head = newNode;
+					} else {
 						newNode.next = curr.next;
-						curr.next = newNode;
 						newNode.prev = curr;
-					} 
-					curr = curr.next;
+						curr.next.prev = newNode;
+						curr.next = newNode;
+					}
 				}
 			}
 		}
@@ -180,44 +214,6 @@ class COMP108A2Cab {
 		return output;		
 	}
 
-/* 	// Delete existing node
-	while (curr != null) {
-		if (curr.data == rArray[i] && head != curr) {
-			if (curr.next != null) {
-				if (head != curr) {
-					curr.next.prev = curr.prev;
-					curr.prev.next = curr.next;
-					curr.next = null;
-					curr.prev = null;
-				} else {
-					head = curr.next;
-					curr.next.prev = head;
-					curr.next = null;
-					curr.prev = null;
-				}
-			} else {
-				tail = curr.prev;
-				curr.prev.next = null;
-				curr.prev = null;
-				
-			}
-			
-		} else {
-			curr = curr.next;
-		}
-		
-	}
-	// Insert into new position
-	curr = head;
-	while (curr != null) {
-		if (curr.freq > newNode.freq && curr.next.freq < newNode.freq) {
-			newNode.next = curr.next;
-			newNode.prev = curr;
-			curr.next.prev = newNode;
-			curr.next = newNode;
-		}
-		curr = curr.next;
-	} */
 	// DO NOT change this method
 	// insert newNode to head of list
 	public void insertHead(COMP108A2Node newNode) {		
