@@ -31,12 +31,12 @@ class Book {
     }
 
     public String toString() {
-        String output = String.format("Title: %s \nAuthor: %s \nEdition: %s \nPages: %s", title, author, edition, pages);
+        String output = String.format("Title: %s\nAuthor: %s\nEdition: %s\nPages: %s\n", title, author, edition, pages);
         return output;
     }
 
-    /* public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Book f = new Book("test", "haha", "uhsjd", 4);
-        System.out.println(f.toString());
+        System.out.print(f.toString());
     } */
 }
