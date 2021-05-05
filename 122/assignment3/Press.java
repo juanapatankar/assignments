@@ -5,8 +5,8 @@ class Press {
     private Map<String, Integer> edition = new HashMap<String, Integer>();
     private Map<String, Queue<Book>> shelf = new HashMap<>();
 
-    public Press(String pathToBookDir, int booksPerEd) {
-        booksPerEdition = booksPerEd;
+    public Press(String pathToBookDir, int booksPerEdition) {
+        this.booksPerEdition = booksPerEdition;
         
     }
 }
